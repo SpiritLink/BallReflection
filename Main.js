@@ -1,8 +1,9 @@
 // Properties and Variable
+
 var app, bump, graphics;    // library
 var player,  ballList;      // variable
 var lineLength = 50;        // constant
-var bulletSpeed = 10;
+
 
 // init
 initComponent();
@@ -25,7 +26,6 @@ app.ticker.add(function(delta){
 // 컴포넌트 초기화
 function initComponent(){
     // init library and variable
-    // << : 추후 DeviceManager로 분리, 통합 관리한다.
     app = new PIXI.Application(720, 1280, {backgroundColor : 0x1099bb});
     graphics = new PIXI.Graphics();
     bump = new Bump(PIXI);
