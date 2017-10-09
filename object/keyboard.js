@@ -1,45 +1,43 @@
-// global variable
-keyLeft = keyboard(37);
-keyRight = keyboard(39);
-keySpace = keyboard(32);
-
 // 키에 대한 정의 (키보드 프리셋)
-function keyboard(keyCode){
-    var key = {};
-    key.code = keyCode;
-    key.isDown = false;
-    key.isUp = true;
-    key.press = undefined;
-    key.release = undefined;
+class keyboard{
+    constructor(keyCode){
+        this.code = keyCode;
+        this.isDown = false;
+        this.isUp = true;
+        this.press = undefined;
+        this.release = undefined;
 
-    // downHandler
-    key.downHandler = function(event){
-        if(event.keyCode === key.code){
-            if(key.isUp && key.press) key.press();
-            key.isDown = true;
-            key.isUp = false;
+        window.addEventListener(
+            "keydown", this.downHandler.bind(this), false
+        );
+
+        window.addEventListener(
+            "keyup", this.upHandler.bind(this), false
+        )
+    }
+
+    //downHandler
+    downHandler(event){
+        if(event.keyCode === this.code){
+            if(this.isUp && this.press) this.press();
+            this.isDown = true;
+            this.isUp = false;
         }
         event.preventDefault();
     };
 
-    // upHandler
-    key.upHandler = function(event){
-        if(event.keyCode === key.code){
-            if(key.isDown && key.release) key.release();
-            key.isDown = false;
-            key.isUp = true;
+    //upHandler
+    upHandler(event){
+        if(event.keyCode === this.code){
+            if(this.isDown && this.release) this.release();
+            this.isDown = false;
+            this.isUp = true;
         }
         event.preventDefault();
     };
-
-    // Attach event listners
-    window.addEventListener(
-        "keydown", key.downHandler.bind(key), false
-    );
-
-    window.addEventListener(
-        "keyup", key.upHandler.bind(key), false
-    );
-    return key;
 }
 
+// global variable
+keyLeft = new keyboard(37);
+keyRight = new keyboard(39);
+keySpace = new keyboard(32);
