@@ -33,48 +33,30 @@ function initComponent(){
     ballList = new Array();
     document.body.appendChild(app.view);
 
-    // init Player // << : 추후에 클래스로 변경합니다.
-    player = PIXI.Sprite.fromImage('required/assets/p.png');
-    player.x = app.renderer.width / 2;
-    player.y = app.renderer.height / 2;
-    player.typeName = 'player';
-    player.anchor.set(0.5);
-    player.rotation = 0;
-
+    // init player
+    player = createPlayer(ballList);
+    player.setX(app.screen.width / 2);
+    player.setY(app.screen.height / 2);
 
     // Add Render
     app.stage.addChild(player);
     app.stage.addChild(graphics);
 }
 
-// 필드 정보 초기화
+// create Field
 function initField(){
 
-    createBox(100,100,1);
-    createBox(150,100,1);
-    createBox(200,100,1);
+    app.stage.addChild(createBox(100,100,1));
+    app.stage.addChild(createBox(150,100,1));
+    app.stage.addChild(createBox(200,100,1));
 }
 
 // init keyboard event function
 function initKeyboard(){
 
-    keyLeft.press = function() {
-        //console.log('press left');
-        player.rotation -= Math.PI / 180;
-        if(player.rotation < -Math.PI / 2){ player.rotation = -Math.PI / 2; }
-    }
-
-    keyRight.press = function() {
-        //console.log('press right');
-        player.rotation += Math.PI / 180;
-        if(player.rotation > Math.PI / 2){ player.rotation = Math.PI / 2; }
-    }
-
-    keySpace.press = function() {
-        console.log('press Space');
-        var ballObj = ball();
-        ballList.push(ballObj);
-    }
+    keyLeft.press = player.rotateLeft;
+    keyRight.press = player.rotateRight;
+    keySpace.press = player.fireBall;
 }
 
 // Update Ball

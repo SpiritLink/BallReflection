@@ -1,3 +1,8 @@
+// global variable
+keyLeft = keyboard(37);
+keyRight = keyboard(39);
+keySpace = keyboard(32);
+
 // 키에 대한 정의 (키보드 프리셋)
 function keyboard(keyCode){
     var key = {};
@@ -38,6 +43,3 @@ function keyboard(keyCode){
     return key;
 }
 
-keyLeft = keyboard(37);
-keyRight = keyboard(39);
-keySpace = keyboard(32);

@@ -4,7 +4,7 @@ ballTexture = PIXI.Texture.fromImage('required/assets/ball.png');
 ballTexture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
 
 
-// Definition
+// object Definition
 function ball(){
     var ballObj = new PIXI.Sprite(ballTexture);
     ballObj.anchor.set(0.5);
