@@ -1,3 +1,4 @@
+/*
 let _singleton = Symbol();
 
 class Singleton {
@@ -16,3 +17,5 @@ class Singleton {
 }
 
 export default Singleton;
+
+*/

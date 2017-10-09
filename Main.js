@@ -16,13 +16,9 @@ app.ticker.add(function(delta){
     updateKeyboard();
     updateBall(delta);
     updateGraphics();
+
 });
 
-// render // << :
-// 컨테이너로 구분한뒤 그릴 순서를 정한다. (Z-Order 또는 Depth와 같은 개념)
-// >> :
-
-// Function Definition
 // 컴포넌트 초기화
 function initComponent(){
     // init library and variable
@@ -33,7 +29,7 @@ function initComponent(){
     document.body.appendChild(app.view);
 
     // init player
-    player = createPlayer(ballList, app);
+    player = createPlayer(0,0);
     player.setX(app.screen.width / 2);
     player.setY(app.screen.height / 2);
 
@@ -56,7 +52,7 @@ function initKeyboard(){
 
     keyLeft.press = player.rotateLeft;
     keyRight.press = player.rotateRight;
-    keySpace.press = player.fireBall;
+    //keySpace.press = player.fireBall(ballList, app);
 }
 
 // Update
@@ -89,8 +85,8 @@ function updateGraphics(){
 function updateKeyboard(){
 
     // << : 추후 Singleton으로 키보드를 분리합니다.
-    if(keyLeft.isDown) {keyLeft.press(); }
-    if(keyRight.isDown){keyRight.press(); }
+    if(keyLeft.isDown) { keyLeft.press(); }
+    if(keyRight.isDown){ keyRight.press(); }
 }
 
 // 객체 복사 함수
