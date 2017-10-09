@@ -12,14 +12,12 @@ initKeyboard();
 // update
 app.ticker.add(function(delta){
 
-    if(keyLeft.isDown) {keyLeft.press(); }
-    if(keyRight.isDown){keyRight.press(); }
-
+    updateKeyboard();
     updateBall(delta);
     updateGraphics();
 });
 
-// render// << :
+// render // << :
 // 컨테이너로 구분한뒤 그릴 순서를 정한다. (Z-Order 또는 Depth와 같은 개념)
 // >> :
 
@@ -27,6 +25,7 @@ app.ticker.add(function(delta){
 // 컴포넌트 초기화
 function initComponent(){
     // init library and variable
+    // << : 추후 DeviceManager로 분리, 통합 관리한다.
     app = new PIXI.Application(720, 1280, {backgroundColor : 0x1099bb});
     graphics = new PIXI.Graphics();
     bump = new Bump(PIXI);
@@ -38,7 +37,7 @@ function initComponent(){
     player.setX(app.screen.width / 2);
     player.setY(app.screen.height / 2);
 
-    // Add Render
+    // << : app stage 대신 플레이어만 관리할 컨테이너에 추가한다.
     app.stage.addChild(player);
     app.stage.addChild(graphics);
 }
@@ -46,6 +45,7 @@ function initComponent(){
 // create Field
 function initField(){
 
+    // << : app.stage 대신 박스만 관리할 컨테이너에 추가한다.
     app.stage.addChild(createBox(100,100,1));
     app.stage.addChild(createBox(150,100,1));
     app.stage.addChild(createBox(200,100,1));
@@ -59,19 +59,17 @@ function initKeyboard(){
     keySpace.press = player.fireBall;
 }
 
-// Update Ball
+// Update
 function updateBall(delta){
 
     for(var i = 0; i < ballList.length; ++i){
         ballList[i].move(delta);
         ballList[i].reflection();
 
-        /*
-        if(ballList[i].x < 0 || ballList[i].x > 720){
+        if(ballList[i].deleteMe){
             app.stage.removeChild(ballList[i]);
             ballList.splice(i,1);
         }
-        */
     }
 
     console.log("볼 개수 : " + ballList.length);
@@ -85,6 +83,14 @@ function updateGraphics(){
     graphics.moveTo(player.x, player.y);
     graphics.lineTo(Math.cos(player.rotation - Math.PI / 2) * lineLength + player.x, Math.sin(player.rotation - Math.PI / 2) * lineLength + player.y);
     graphics.endFill();
+}
+
+// update Keyboard
+function updateKeyboard(){
+
+    // << : 추후 Singleton으로 키보드를 분리합니다.
+    if(keyLeft.isDown) {keyLeft.press(); }
+    if(keyRight.isDown){keyRight.press(); }
 }
 
 // 객체 복사 함수

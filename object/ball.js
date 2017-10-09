@@ -11,6 +11,7 @@ function ball(){
     ballObj.rotation = clone(player.rotation);
     ballObj.x = player.x;
     ballObj.y = player.y;
+    ballObj.deleteMe = false;
 
     ballObj.move = function(delta){
         ballObj.x += Math.cos(ballObj.rotation - Math.PI / 2) * delta * bulletSpeed;
@@ -26,7 +27,7 @@ function ball(){
         if(ballObj.y < 0 || ballObj.y > 1280) {
             ballObj.rotation = Math.PI - ballObj.rotation;
             if(ballObj.y < 0) ballObj.y = 10;
-            if(ballObj.y > 1280) ballObj.y = 1270;
+            if(ballObj.y > 1280) ballObj.deleteMe = true;
         }
     }
 
