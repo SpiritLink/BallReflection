@@ -33,7 +33,7 @@ function initComponent(){
     document.body.appendChild(app.view);
 
     // init player
-    player = createPlayer(ballList);
+    player = createPlayer(ballList, app);
     player.setX(app.screen.width / 2);
     player.setY(app.screen.height / 2);
 

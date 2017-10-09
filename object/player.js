@@ -2,7 +2,7 @@
 var playerImg;
 playerImg = PIXI.Sprite.fromImage('required/assets/p.png');
 
-function createPlayer(ballList){
+function createPlayer(ballList, app){
     var player;
 
     player = PIXI.Sprite.fromImage('required/assets/p.png');
@@ -23,7 +23,7 @@ function createPlayer(ballList){
     }
 
     player.fireBall = function(){
-        var ballObj = ball();
+        var ballObj = new ball(player.x, player.y, player.rotation, app);
         ballList.push(ballObj);
     }
 

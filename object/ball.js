@@ -4,34 +4,35 @@ ballTexture = PIXI.Texture.fromImage('required/assets/ball.png');
 ballTexture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
 var bulletSpeed = 10;
 
-// object Definition
-function ball(){
-    var ballObj = new PIXI.Sprite(ballTexture);
-    ballObj.anchor.set(0.5);
-    ballObj.rotation = clone(player.rotation);
-    ballObj.x = player.x;
-    ballObj.y = player.y;
-    ballObj.deleteMe = false;
+// Definition
+class ball{
 
-    ballObj.move = function(delta){
-        ballObj.x += Math.cos(ballObj.rotation - Math.PI / 2) * delta * bulletSpeed;
-        ballObj.y += Math.sin(ballObj.rotation - Math.PI / 2) * delta * bulletSpeed;
+    constructor(x, y, rotation, app){
+        this.sprite = new PIXI.Sprite(ballTexture);
+        this.sprite.anchor.set(0.5);
+        this.sprite.x = x;
+        this.sprite.y = y;
+        this.sprite.rotation = rotation;
+        this.deleteMe = false
+        app.stage.addChild(this.sprite);
     }
 
-    ballObj.reflection = function(){
-        if(ballObj.x < 0 || ballObj.x > 720){
-            ballObj.rotation = Math.abs(ballObj.rotation + (Math.PI / 2));
-            if(ballObj.x < 0) ballObj.x = 0;
-            if(ballObj.x > 720) ballObj.x = 700;
-        }
-        if(ballObj.y < 0 || ballObj.y > 1280) {
-            ballObj.rotation = Math.PI - ballObj.rotation;
-            if(ballObj.y < 0) ballObj.y = 10;
-            if(ballObj.y > 1280) ballObj.deleteMe = true;
-        }
+    move(delta){
+        this.sprite.x += Math.cos(this.sprite.rotation - Math.PI / 2) * delta * bulletSpeed;
+        this.sprite.y += Math.sin(this.sprite.rotation - Math.PI / 2) * delta * bulletSpeed;
     }
 
-    app.stage.addChild(ballObj);
+    reflection(){
+        if(this.sprite.x < 0 || this.sprite.x > 720){
+            this.sprite.rotation = Math.abs(this.sprite.rotation + (Math.PI / 2));
+            if(this.sprite.x < 0) this.sprite.x = 0;
+            if(this.sprite.x > 720) this.sprite.x = 700;
+        }
 
-    return ballObj;
+        if(this.sprite.y < 0 || this.sprite.y > 1280){
+            this.sprite.rotation = Math.PI - this.sprite.rotation;
+            if(this.sprite.y < 0) this.sprite.y = 10;
+            if(this.sprite.y > 1280) this.deleteMe = true;
+        }
+    }
 }
