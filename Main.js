@@ -46,9 +46,9 @@ function initComponent(){
 function initField(){
 
     // << : app.stage 대신 박스만 관리할 컨테이너에 추가한다.
-    app.stage.addChild(createBox(100,100,1));
-    app.stage.addChild(createBox(150,100,1));
-    app.stage.addChild(createBox(200,100,1));
+    app.stage.addChild(new box(100, 100).sprite);
+    app.stage.addChild(new box(150, 100).sprite);
+    app.stage.addChild(new box(200, 100).sprite);
 }
 
 // init keyboard event function
