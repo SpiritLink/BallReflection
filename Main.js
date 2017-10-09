@@ -1,7 +1,7 @@
 // Properties and Variable
-var app, bump, graphics;                            // library
-var player, texture1, texture2, texture3, ballList; // variable
-var lineLength = 50;                                // constant
+var app, bump, graphics;    // library
+var player,  ballList;      // variable
+var lineLength = 50;        // constant
 var bulletSpeed = 10;
 
 // init
@@ -41,13 +41,6 @@ function initComponent(){
     player.anchor.set(0.5);
     player.rotation = 0;
 
-    // init resource
-    texture1 = PIXI.Texture.fromImage('required/assets/box1.png');
-    texture1.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
-    texture2 = PIXI.Texture.fromImage('required/assets/box2.png');
-    texture2.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
-    texture3 = PIXI.Texture.fromImage('required/assets/box3.png');
-    texture3.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
 
     // Add Render
     app.stage.addChild(player);
@@ -82,25 +75,6 @@ function initKeyboard(){
         var ballObj = ball();
         ballList.push(ballObj);
     }
-}
-
-// 박스 생성 함수 (스프라이트)
-function createBox(x, y, color){
-    var box;
-
-    if(color === 1)     { box = new PIXI.Sprite(texture1); }
-    else if(color === 2){ box = new PIXI.Sprite(texture2); }
-    else                { box = new PIXI.Sprite(texture3); }
-
-    box.x = x;
-    box.y = y;
-
-    box.interactive = true;
-
-    box.anchor.set(0.5);
-    box.scale.set(2);
-
-    app.stage.addChild(box);
 }
 
 // Update Ball
