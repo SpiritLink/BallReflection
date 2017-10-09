@@ -44,6 +44,7 @@ class playerClass{
         this.sprite.typeName = 'player';
         this.sprite.anchor.set(0.5);
         this.sprite.rotation = 0;
+
     }
 
     rotateLeft(){

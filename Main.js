@@ -4,7 +4,6 @@ var app, bump, graphics;    // library
 var player,  ballList;      // variable
 var lineLength = 50;        // constant
 
-
 // init
 initComponent();
 initField();
@@ -29,7 +28,7 @@ function initComponent(){
     document.body.appendChild(app.view);
 
     // init player
-    player = createPlayer(0,0);
+    player = createPlayer(ballList, app);
     player.setX(app.screen.width / 2);
     player.setY(app.screen.height / 2);
 
@@ -52,6 +51,7 @@ function initKeyboard(){
 
     keyLeft.press = player.rotateLeft;
     keyRight.press = player.rotateRight;
+    keySpace.press = player.fireBall;
     //keySpace.press = player.fireBall(ballList, app);
 }
 
