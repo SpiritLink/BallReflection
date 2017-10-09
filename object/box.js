@@ -1,11 +1,11 @@
 // variable (Resource)
-var box1, box2, box3;
-box1 = PIXI.Texture.fromImage('required/assets/box1.png');
-box1.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
-box2 = PIXI.Texture.fromImage('required/assets/box2.png');
-box2.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
-box3 = PIXI.Texture.fromImage('required/assets/box3.png');
-box3.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
+
+var box1 = PIXI.Texture.fromImage('required/assets/box1.png');
+    box1.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
+var box2 = PIXI.Texture.fromImage('required/assets/box2.png');
+    box2.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
+var box3 = PIXI.Texture.fromImage('required/assets/box3.png');
+    box3.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
 
 // Definition
 class box {

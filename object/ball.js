@@ -1,7 +1,7 @@
 // variable (Resource)
-var ballTexture;
-ballTexture = PIXI.Texture.fromImage('required/assets/ball.png');
+var ballTexture = PIXI.Texture.fromImage('required/assets/ball.png');
 ballTexture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
+
 var bulletSpeed = 10;
 
 // Definition
