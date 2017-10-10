@@ -2,6 +2,7 @@
 
 var app, bump, graphics;    // library
 var player,  ballList;      // variable
+var objContainer, ballContainer, plContainer;
 var lineLength = 50;        // constant
 
 // init
@@ -15,7 +16,6 @@ app.ticker.add(function(delta){
     updateKeyboard();
     updateBall(delta);
     updateGraphics();
-
 });
 
 // 컴포넌트 초기화
@@ -24,26 +24,34 @@ function initComponent(){
     app = new PIXI.Application(720, 1280, {backgroundColor : 0x1099bb});
     graphics = new PIXI.Graphics();
     bump = new Bump(PIXI);
+    objContainer = new PIXI.Container();
+    ballContainer = new PIXI.Container();
+    plContainer = new PIXI.Container();
+
     ballList = new Array();
     document.body.appendChild(app.view);
 
     // init player
-    player = createPlayer(ballList, app);
+    player = createPlayer(ballList, ballContainer);
     player.setX(app.screen.width / 2);
     player.setY(app.screen.height / 2);
 
-    // << : app stage 대신 플레이어만 관리할 컨테이너에 추가한다.
-    app.stage.addChild(player);
-    app.stage.addChild(graphics);
+    plContainer.addChild(player);
+    plContainer.addChild(graphics);
+    //app.stage.addChild(player.sprite);
+    //app.stage.addChild(graphics);
+
+    // add Container
+    app.stage.addChild(ballContainer);
+    app.stage.addChild(plContainer);
 }
 
 // create Field
 function initField(){
 
-    // << : app.stage 대신 박스만 관리할 컨테이너에 추가한다.
-    app.stage.addChild(new box(100, 100).sprite);
-    app.stage.addChild(new box(150, 100).sprite);
-    app.stage.addChild(new box(200, 100).sprite);
+    ballContainer.addChild(new box(100, 100).sprite)
+    ballContainer.addChild(new box(150, 100).sprite)
+    ballContainer.addChild(new box(200, 100).sprite)
 }
 
 // init keyboard event function
@@ -89,18 +97,3 @@ function updateKeyboard(){
     if(keyRight.isDown){ keyRight.press(); }
 }
 
-// 객체 복사 함수
-function clone(obj){
-    if(obj === null || typeof(obj) !== 'object')
-        return obj;
-
-    var copy = obj.constructor();
-
-    for(var attr in obj){
-        if(obj.hasOwnProperty(attr)){
-            copy[attr] = clone(obj[attr]);
-        }
-    }
-
-    return copy;
-}

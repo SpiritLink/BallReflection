@@ -7,14 +7,14 @@ var bulletSpeed = 10;
 // Definition
 class ball{
 
-    constructor(x, y, rotation, app){
+    constructor(x, y, rotation, container){
         this.sprite = new PIXI.Sprite(ballTexture);
         this.sprite.anchor.set(0.5);
         this.sprite.x = x;
         this.sprite.y = y;
         this.sprite.rotation = rotation;
         this.deleteMe = false
-        app.stage.addChild(this.sprite);
+        container.addChild(this.sprite);
     }
 
     move(delta){
