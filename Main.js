@@ -3,10 +3,10 @@
 var app, bump, graphics;    // library
 var player,  ballList;      // variable
 var objContainer, ballContainer, plContainer;
-var lineLength = 50;        // constant
+let lineLength = 50;        // constant
 
 // init
-initComponent();
+initVariable();
 initField();
 initKeyboard();
 
@@ -18,18 +18,18 @@ app.ticker.add(function(delta){
     updateGraphics();
 });
 
-// 컴포넌트 초기화
-function initComponent(){
-    // init library and variable
+// init Variable
+function initVariable(){
+    // init var
     app = new PIXI.Application(720, 1280, {backgroundColor : 0x1099bb});
+    document.body.appendChild(app.view);
+
     graphics = new PIXI.Graphics();
     bump = new Bump(PIXI);
     objContainer = new PIXI.Container();
     ballContainer = new PIXI.Container();
     plContainer = new PIXI.Container();
-
     ballList = new Array();
-    document.body.appendChild(app.view);
 
     // init player
     player = createPlayer(ballList, ballContainer);
@@ -38,20 +38,19 @@ function initComponent(){
 
     plContainer.addChild(player);
     plContainer.addChild(graphics);
-    //app.stage.addChild(player.sprite);
-    //app.stage.addChild(graphics);
 
     // add Container
+    app.stage.addChild(objContainer);
     app.stage.addChild(ballContainer);
     app.stage.addChild(plContainer);
 }
 
-// create Field
+// init Field
 function initField(){
 
-    ballContainer.addChild(new box(100, 100).sprite)
-    ballContainer.addChild(new box(150, 100).sprite)
-    ballContainer.addChild(new box(200, 100).sprite)
+    objContainer.addChild(new box(100, 100).sprite);
+    objContainer.addChild(new box(150, 100).sprite);
+    objContainer.addChild(new box(200, 100).sprite);
 }
 
 // init keyboard event function
@@ -60,10 +59,9 @@ function initKeyboard(){
     keyLeft.press = player.rotateLeft;
     keyRight.press = player.rotateRight;
     keySpace.press = player.fireBall;
-    //keySpace.press = player.fireBall(ballList, app);
 }
 
-// Update
+// update Ball
 function updateBall(delta){
 
     for(var i = 0; i < ballList.length; ++i){
