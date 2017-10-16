@@ -2,7 +2,7 @@
 var texture;
 texture = PIXI.Texture.fromImage('required/assets/p.png');
 
-
+/*
 function createPlayer(ballList, container){
     var player;
 
@@ -33,7 +33,7 @@ function createPlayer(ballList, container){
 
     return player;
 }
-/*
+*/
 class playerClass{
     constructor(x, y){
         this.sprite = new PIXI.Sprite(texture);
@@ -55,12 +55,11 @@ class playerClass{
         if(this.sprite.rotation > Math.PI / 2) { this.sprite.rotation = Math.PI / 2; }
     }
 
-    fireBall(ballList, container){
-        var ballObj = new ball(player.x, player.y, player.rotation, container);
+    fireBall(){
+        var ballObj = new ball(this.sprite.x, this.sprite.y, this.sprite.rotation);
         ballList.push(ballObj);
     }
 
     setX(value){ this.sprite.x = value; }
     setY(value){ this.sprite.y = value; }
 }
-*/

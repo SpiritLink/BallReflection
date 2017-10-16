@@ -32,11 +32,11 @@ function initVariable(){
     ballList = new Array();
 
     // init player
-    player = createPlayer(ballList, ballContainer);
+    player = new playerClass(0,0);
     player.setX(app.screen.width / 2);
     player.setY(app.screen.height / 2);
 
-    plContainer.addChild(player);
+    plContainer.addChild(player.sprite);
     plContainer.addChild(graphics);
 
     // add Container
@@ -56,9 +56,9 @@ function initField(){
 // init keyboard event function
 function initKeyboard(){
 
-    keyLeft.press = player.rotateLeft;
-    keyRight.press = player.rotateRight;
-    keySpace.press = player.fireBall;
+    keyLeft.press = player.rotateLeft.bind(player);
+    keyRight.press = player.rotateRight.bind(player);
+    keySpace.press = player.fireBall.bind(player);
 }
 
 // update Ball
