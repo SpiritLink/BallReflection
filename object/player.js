@@ -1,8 +1,8 @@
 // variable (Resource)
-var texture;
+let texture;
 texture = PIXI.Texture.fromImage('required/assets/p.png');
 
-var player, plContainer;
+let player, plContainer;
 plContainer = new PIXI.Container();
 
 class playerClass{

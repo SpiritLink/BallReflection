@@ -2,10 +2,9 @@
 var ballTexture = PIXI.Texture.fromImage('required/assets/ball.png');
 ballTexture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
 
-var bulletSpeed = 10;
+var bulletSpeed = 2;
 
-var ballContainer;
-ballContainer = new PIXI.Container();
+var ballContainer = new PIXI.Container();
 
 var ballList;
 ballList = new Array();
@@ -27,15 +26,16 @@ class ball{
         this.sprite.y += Math.sin(this.sprite.rotation - Math.PI / 2) * delta * bulletSpeed;
     }
 
+    // 벽에 부딪힌 후 각도를 변경하는 함수
     reflection(){
         if(this.sprite.x < 0 || this.sprite.x > 720){
-            this.sprite.rotation = Math.abs(this.sprite.rotation + (Math.PI / 2));
-            if(this.sprite.x < 0) this.sprite.x = 0;
-            if(this.sprite.x > 720) this.sprite.x = 700;
+            this.sprite.rotation = Math.PI - this.sprite.rotation;
+            if(this.sprite.x < 0) this.sprite.x = 40;
+            if(this.sprite.x > 720) this.sprite.x = 680;
         }
 
         if(this.sprite.y < 0 || this.sprite.y > 1280){
-            this.sprite.rotation = Math.PI - this.sprite.rotation;
+            this.sprite.rotation = (Math.PI * 2) - this.sprite.rotation);
             if(this.sprite.y < 0) this.sprite.y = 10;
             if(this.sprite.y > 1280) this.deleteMe = true;
         }
