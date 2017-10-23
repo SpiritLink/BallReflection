@@ -1,12 +1,12 @@
 // Properties and Variable
 
 var app, bump, graphics;    // library
-var player,  ballList;      // variable
-var objContainer, ballContainer, plContainer;
+      // variable
+
 let lineLength = 50;        // constant
 
 // init
-initVariable();
+initComponent();
 initField();
 initKeyboard();
 
@@ -19,25 +19,15 @@ app.ticker.add(function(delta){
 });
 
 // init Variable
-function initVariable(){
-    // init var
+function initComponent(){
+
     app = new PIXI.Application(720, 1280, {backgroundColor : 0x1099bb});
     document.body.appendChild(app.view);
-
     graphics = new PIXI.Graphics();
     bump = new Bump(PIXI);
-    objContainer = new PIXI.Container();
-    ballContainer = new PIXI.Container();
-    plContainer = new PIXI.Container();
-    ballList = new Array();
 
-    // init player
-    player = new playerClass(0,0);
     player.setX(app.screen.width / 2);
     player.setY(app.screen.height / 2);
-
-    plContainer.addChild(player.sprite);
-    plContainer.addChild(graphics);
 
     // add Container
     app.stage.addChild(objContainer);
@@ -47,10 +37,9 @@ function initVariable(){
 
 // init Field
 function initField(){
-
-    objContainer.addChild(new box(100, 100).sprite);
-    objContainer.addChild(new box(150, 100).sprite);
-    objContainer.addChild(new box(200, 100).sprite);
+    objContainer.addChild(new box(100,100).sprite);
+    objContainer.addChild(new box(150,100).sprite);
+    objContainer.addChild(new box(200,100).sprite);
 }
 
 // init keyboard event function
@@ -61,22 +50,6 @@ function initKeyboard(){
     keySpace.press = player.fireBall.bind(player);
 }
 
-// update Ball
-function updateBall(delta){
-
-    for(var i = 0; i < ballList.length; ++i){
-        ballList[i].move(delta);
-        ballList[i].reflection();
-
-        if(ballList[i].deleteMe){
-            app.stage.removeChild(ballList[i]);
-            ballList.splice(i,1);
-        }
-    }
-
-    console.log("볼 개수 : " + ballList.length);
-}
-
 // draw Line
 function updateGraphics(){
     graphics.clear();
@@ -85,13 +58,5 @@ function updateGraphics(){
     graphics.moveTo(player.x, player.y);
     graphics.lineTo(Math.cos(player.rotation - Math.PI / 2) * lineLength + player.x, Math.sin(player.rotation - Math.PI / 2) * lineLength + player.y);
     graphics.endFill();
-}
-
-// update Keyboard
-function updateKeyboard(){
-
-    // << : 추후 Singleton으로 키보드를 분리합니다.
-    if(keyLeft.isDown) { keyLeft.press(); }
-    if(keyRight.isDown){ keyRight.press(); }
 }
 

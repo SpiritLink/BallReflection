@@ -1,21 +1,24 @@
 // variable (Resource)
 
-var box1 = PIXI.Texture.fromImage('required/assets/box1.png');
-    box1.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
-var box2 = PIXI.Texture.fromImage('required/assets/box2.png');
-    box2.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
-var box3 = PIXI.Texture.fromImage('required/assets/box3.png');
-    box3.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
+var objContainer;
+objContainer = new PIXI.Container();
 
-// Definition
-class box {
+class box
+{
     constructor(x, y){
-        this.sprite = new PIXI.Sprite(box1);
+        this.sprite = new PIXI.Sprite(PIXI.Texture.fromImage('required/assets/box1.png'));
         this.sprite.x = x;
         this.sprite.y = y;
-
         this.sprite.interactive = true;
         this.sprite.anchor.set(0.5);
         this.sprite.scale.set(2);
+    }
+
+    setX(x){
+        this.sprite.x = x;
+    }
+
+    setY(y){
+        this.sprite.y = y;
     }
 }

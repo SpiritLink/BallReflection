@@ -4,6 +4,11 @@ ballTexture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
 
 var bulletSpeed = 10;
 
+var ballContainer;
+ballContainer = new PIXI.Container();
+
+var ballList;
+ballList = new Array();
 // Definition
 class ball{
 
@@ -35,4 +40,20 @@ class ball{
             if(this.sprite.y > 1280) this.deleteMe = true;
         }
     }
+}
+
+// update Ball
+function updateBall(delta){
+
+    for(var i = 0; i < ballList.length; ++i){
+        ballList[i].move(delta);
+        ballList[i].reflection();
+
+        if(ballList[i].deleteMe){
+            app.stage.removeChild(ballList[i]);
+            ballList.splice(i,1);
+        }
+    }
+
+    console.log("볼 개수 : " + ballList.length);
 }

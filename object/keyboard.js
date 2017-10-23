@@ -37,6 +37,14 @@ class keyboard{
     };
 }
 
+// update Keyboard
+function updateKeyboard(){
+
+    // << : 추후 Singleton으로 키보드를 분리합니다.
+    if(keyLeft.isDown) { keyLeft.press(); }
+    if(keyRight.isDown){ keyRight.press(); }
+}
+
 // global variable
 keyLeft = new keyboard(37);
 keyRight = new keyboard(39);
