@@ -1,9 +1,9 @@
 // Properties and Variable
 
-    var app, bump, graphics;    // library
-    // variable
+var app, bump, graphics;    // library
+// variable
 
-    let lineLength = 50;        // constant
+let lineLength = 50;        // constant
 
 // init
     initComponent();
