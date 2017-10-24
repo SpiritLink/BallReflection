@@ -29,20 +29,28 @@ class ball{
     // 벽에 부딪힌 후 각도를 변경하는 함수
     reflection(){
         if(this.sprite.x < 0 || this.sprite.x > 720){
-            this.sprite.rotation = -this.sprite.rotation;
+            this.bounceX();
             if(this.sprite.x < 0){
-                this.sprite.x = 40;
+                this.sprite.x = 10;
             }
             if(this.sprite.x > 720){
-                this.sprite.x = 680;
+                this.sprite.x = 710;
             }
         }
 
         if(this.sprite.y < 0 || this.sprite.y > 1280){
-            this.sprite.rotation = Math.PI - this.sprite.rotation;
+            this.bounceY();
             if(this.sprite.y < 0) this.sprite.y = 10;
             if(this.sprite.y > 1280) this.deleteMe = true;
         }
+    }
+
+    bounceX(){
+        this.sprite.rotation = -this.sprite.rotation;
+    }
+
+    bounceY(){
+        this.sprite.rotation = Math.PI - this.sprite.rotation;
     }
 }
 
@@ -56,6 +64,17 @@ function updateBall(delta){
         if(ballList[i].deleteMe){
             ballContainer.removeChild(ballList[i].sprite);
             ballList.splice(i,1);
+        }
+    }
+
+    for(var i = 0; i < ballList.length; i++)
+    {
+        for(var j = 0; j < objContainer.children.length; j++)
+        {
+            if(bump.hitTestRectangle(ballList[i].sprite, objContainer.children[j]))
+            {
+                console.log("Collision");
+            }
         }
     }
 

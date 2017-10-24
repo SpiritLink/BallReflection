@@ -14,11 +14,11 @@ class box
         this.sprite.scale.set(2);
     }
 
-    setX(x){
+    setX(x) {
         this.sprite.x = x;
     }
 
-    setY(y){
+    setY(y) {
         this.sprite.y = y;
     }
 }

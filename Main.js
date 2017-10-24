@@ -12,9 +12,8 @@ let lineLength = 50;        // constant
 
 // update
     app.ticker.add(function(delta){
-
-        updateKeyboard();
         updateBall(delta);
+        updateKeyboard();
         updateGraphics();
     });
 
