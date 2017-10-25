@@ -12,9 +12,11 @@ let lineLength = 50;        // constant
 
 // update
     app.ticker.add(function(delta){
+        graphics.clear();
         updateBall(delta);
         updateKeyboard();
         BALL.updateGraphics();
+        BOX.updateGraphics();
     });
 
 // init Variable
@@ -37,11 +39,15 @@ let lineLength = 50;        // constant
 
 // init Field
     function initField(){
+
         for(var i = 0; i <= 1000; i += 50)
         {
             var box = new BOX.box(i, 100);
             BOX.boxContainer.addChild(box.sprite);
         }
+
+        //var box = new BOX.box(200,200);
+        //BOX.boxContainer.addChild(box.sprite);
     }
 
 // init keyboard event function

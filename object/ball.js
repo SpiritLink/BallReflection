@@ -10,7 +10,6 @@ BALL.ballContainer = new PIXI.Container();
 // 좌표 디버그용 함수
 BALL.updateGraphics = function () {
 
-    graphics.clear();
     for(var i = 0; i < BALL.ballList.length; ++i){
         graphics.lineStyle(0);
         graphics.beginFill(0xFF0000, 0.5);
@@ -63,19 +62,14 @@ BALL.ball = class{
         let isInX = false;
         let isInY = false;
 
-        console.log(bound.left);
-        console.log(bound.right);
-        console.log(this.sprite.x);
-        console.log(this.sprite.y);
-
-        if(this.sprite.centerX >= bound.x - bound.width / 2 && this.sprite.centerX <= bound.x + bound.width / 2)
+        if(this.sprite.centerX >= bound.x && this.sprite.centerX <= bound.x + bound.width)
         {
             console.log("bound Y !");
             isInX = true;
         }
 
 
-        if(this.sprite.centerY >= bound.top && this.sprite.centerY <= bound.bottom)
+        if(this.sprite.centerY >= bound.y && this.sprite.centerY <= bound.y + bound.height)
         {
             console.log(bound.top);
             console.log(bound.bottom);
@@ -120,11 +114,11 @@ function updateBall(delta){
         {
             if(bump.hitTestRectangle(BALL.ballList[i].sprite, BOX.boxContainer.children[j]))
             {
+                var rect = BOX.boxContainer.children[j].getBounds();
+                BALL.ballList[i].boundByBound(rect);
+
                 BOX.boxContainer.removeChild(BOX.boxContainer.children[j]);
                 console.log("Collision");
-
-                BALL.ballList[i].boundByBound(BOX.boxContainer.children[j].getBounds());
-
                 // << : 조건에 맞춰서 바운드를 어떻게 할지 결정해 줘야 한다.
             }
         }
