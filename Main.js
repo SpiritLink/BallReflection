@@ -29,7 +29,7 @@ let lineLength = 50;        // constant
         player.setY(app.screen.height / 2);
 
         // add Container
-        app.stage.addChild(objContainer);
+        app.stage.addChild(BOX.boxContainer);
         app.stage.addChild(BALL.ballContainer);
         app.stage.addChild(plContainer);
     }
@@ -38,7 +38,8 @@ let lineLength = 50;        // constant
     function initField(){
         for(var i = 0; i <= 1000; i += 50)
         {
-            objContainer.addChild(new box(i,100).sprite);
+            var box = new BOX.box(i, 100);
+            BOX.boxContainer.addChild(box.sprite);
         }
     }
 
