@@ -19,6 +19,7 @@ BALL.updateGraphics = function () {
 
 }
 
+// 볼 정의
 BALL.ball = class{
     constructor(x, y, rotation){
         this.sprite = new PIXI.Sprite(BALL.Texture);
@@ -78,13 +79,13 @@ BALL.ball = class{
         }
 
 
-        if(isInX == true)
+        if(isInX === true)
             this.bounceY();
 
-        if(isInY == true)
+        if(isInY === true)
             this.bounceX();
 
-        if(isInX == false && isInY == false)
+        if(isInX === false && isInY === false)
         {
             this.bounceX();
             this.bounceY();
@@ -119,10 +120,7 @@ function updateBall(delta){
 
                 BOX.boxContainer.removeChild(BOX.boxContainer.children[j]);
                 console.log("Collision");
-                // << : 조건에 맞춰서 바운드를 어떻게 할지 결정해 줘야 한다.
             }
-        }
-    }
-
-    //console.log("볼 개수 : " + ballList.length);
+        } // for BOX
+    } // for BALL
 }

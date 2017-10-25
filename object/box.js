@@ -10,29 +10,6 @@ BOX.updateGraphics = function () {
 
         var rect = BOX.boxContainer.children[i].getBounds();
 
-        /*
-        graphics.lineStyle(0);
-        graphics.beginFill(0xFF0000, 0.5);
-        graphics.drawCircle(rect.x - (rect.width / 2), rect.y - (rect.height / 2), 5);
-        graphics.endFill();
-
-        graphics.lineStyle(0);
-        graphics.beginFill(0xFF0000, 0.5);
-        graphics.drawCircle(rect.x + (rect.width / 2), rect.y - (rect.height / 2), 5);
-        graphics.endFill();
-
-        graphics.lineStyle(0);
-        graphics.beginFill(0xFF0000, 0.5);
-        graphics.drawCircle(rect.x + (rect.width / 2), rect.y + (rect.height / 2), 5);
-        graphics.endFill();
-
-        graphics.lineStyle(0);
-        graphics.beginFill(0xFF0000, 0.5);
-        graphics.drawCircle(rect.x - (rect.width / 2), rect.y + (rect.height / 2), 5);
-        graphics.endFill();
-*/
-
-
         graphics.lineStyle(0);
         graphics.beginFill(0xFF0000, 0.5);
         graphics.drawCircle(rect.x , rect.y , 5);
@@ -52,11 +29,10 @@ BOX.updateGraphics = function () {
         graphics.beginFill(0xFF0000, 0.5);
         graphics.drawCircle(rect.x , rect.y + rect.height, 5);
         graphics.endFill();
-
     }
-
 }
 
+// 박스 정의
 BOX.box = class{
     constructor(x, y){
         this.sprite = new PIXI.Sprite(BOX.Texture);

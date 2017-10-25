@@ -14,7 +14,7 @@ let lineLength = 50;        // constant
     app.ticker.add(function(delta){
         graphics.clear();
         updateBall(delta);
-        updateKeyboard();
+        KEYBOARD.update();
         BALL.updateGraphics();
         BOX.updateGraphics();
     });
@@ -53,9 +53,9 @@ let lineLength = 50;        // constant
 // init keyboard event function
     function initKeyboard(){
 
-        keyLeft.press = player.rotateLeft.bind(player);
-        keyRight.press = player.rotateRight.bind(player);
-        keySpace.press = player.fireBall.bind(player);
+        KEYBOARD.KeyLeft.press = player.rotateLeft.bind(player);
+        KEYBOARD.KeyRight.press = player.rotateRight.bind(player);
+        KEYBOARD.KeySpace.press = player.fireBall.bind(player);
     }
 
 
