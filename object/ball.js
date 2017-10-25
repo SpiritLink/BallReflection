@@ -57,6 +57,7 @@ function updateBall(delta){
         if(BALL.ballList[i].deleteMe){
             BALL.ballContainer.removeChild(BALL.ballList[i].sprite);
             BALL.ballList.splice(i,1);
+            console.log("Delete Ball !");
         }
     }
 

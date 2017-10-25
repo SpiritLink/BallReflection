@@ -31,7 +31,8 @@ let lineLength = 50;        // constant
         // add Container
         app.stage.addChild(BOX.boxContainer);
         app.stage.addChild(BALL.ballContainer);
-        app.stage.addChild(plContainer);
+        app.stage.addChild(PLAYER.Container);
+        PLAYER.Container.addChild(graphics);    // 현재 플레이어 컨테이너에 임시 설정
     }
 
 // init Field

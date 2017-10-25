@@ -1,5 +1,6 @@
-// 키에 대한 정의 (키보드 프리셋)
-class keyboard{
+var KEYBOARD = KEYBOARD || {};
+
+KEYBOARD.keyboard = class{
     constructor(keyCode){
         this.code = keyCode;
         this.isDown = false;
@@ -13,7 +14,7 @@ class keyboard{
 
         window.addEventListener(
             "keyup", this.upHandler.bind(this), false
-        )
+        );
     }
 
     //downHandler
@@ -36,6 +37,7 @@ class keyboard{
         event.preventDefault();
     };
 }
+// 키에 대한 정의 (키보드 프리셋)
 
 // update Keyboard
 function updateKeyboard(){
@@ -46,6 +48,6 @@ function updateKeyboard(){
 }
 
 // global variable
-keyLeft = new keyboard(37);
-keyRight = new keyboard(39);
-keySpace = new keyboard(32);
+keyLeft = new KEYBOARD.keyboard(37);
+keyRight = new KEYBOARD.keyboard(39);
+keySpace = new KEYBOARD.keyboard(32);

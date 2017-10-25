@@ -1,4 +1,3 @@
-// variable (Resource)
 var BOX = BOX || {};
 
 BOX.boxContainer = new PIXI.Container();
