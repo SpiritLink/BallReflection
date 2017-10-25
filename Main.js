@@ -30,15 +30,16 @@ let lineLength = 50;        // constant
 
         // add Container
         app.stage.addChild(objContainer);
-        app.stage.addChild(ballContainer);
+        app.stage.addChild(BALL.ballContainer);
         app.stage.addChild(plContainer);
     }
 
 // init Field
     function initField(){
-        objContainer.addChild(new box(100,100).sprite);
-        objContainer.addChild(new box(150,100).sprite);
-        objContainer.addChild(new box(200,100).sprite);
+        for(var i = 0; i <= 1000; i += 50)
+        {
+            objContainer.addChild(new box(i,100).sprite);
+        }
     }
 
 // init keyboard event function

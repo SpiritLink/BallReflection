@@ -1,16 +1,16 @@
+var BALL = BALL || {};
+
 // variable (Resource)
 var ballTexture = PIXI.Texture.fromImage('required/assets/ball.png');
 ballTexture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
 
 var bulletSpeed = 10;
 
-var ballContainer = new PIXI.Container();
-
-var ballList;
-ballList = new Array();
 // Definition
-class ball{
+BALL.ballList = new Array();
+BALL.ballContainer = new PIXI.Container();
 
+BALL.ball = class{
     constructor(x, y, rotation){
         this.sprite = new PIXI.Sprite(ballTexture);
         this.sprite.anchor.set(0.5);
@@ -18,7 +18,7 @@ class ball{
         this.sprite.y = y;
         this.sprite.rotation = rotation;
         this.deleteMe = false
-        ballContainer.addChild(this.sprite);
+        BALL.ballContainer.addChild(this.sprite);
     }
 
     move(delta){
@@ -52,31 +52,32 @@ class ball{
     bounceY(){
         this.sprite.rotation = Math.PI - this.sprite.rotation;
     }
-}
+};
 
 // update Ball
 function updateBall(delta){
 
-    for(var i = 0; i < ballList.length; ++i){
-        ballList[i].move(delta);
-        ballList[i].reflection();
+    for(var i = 0; i < BALL.ballList.length; ++i){
+        BALL.ballList[i].move(delta);
+        BALL.ballList[i].reflection();
 
-        if(ballList[i].deleteMe){
-            ballContainer.removeChild(ballList[i].sprite);
-            ballList.splice(i,1);
+        if(BALL.ballList[i].deleteMe){
+            BALL.ballContainer.removeChild(BALL.ballList[i].sprite);
+            BALL.ballList.splice(i,1);
         }
     }
 
-    for(var i = 0; i < ballList.length; i++)
+    for(var i = 0; i < BALL.ballList.length; i++)
     {
         for(var j = 0; j < objContainer.children.length; j++)
         {
-            if(bump.hitTestRectangle(ballList[i].sprite, objContainer.children[j]))
+            if(bump.hitTestRectangle(BALL.ballList[i].sprite, objContainer.children[j]))
             {
+                objContainer.removeChild(objContainer.children[j]);
                 console.log("Collision");
             }
         }
     }
 
-    console.log("볼 개수 : " + ballList.length);
+    //console.log("볼 개수 : " + ballList.length);
 }

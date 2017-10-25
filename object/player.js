@@ -27,8 +27,8 @@ class playerClass{
     }
 
     fireBall(){
-        var ballObj = new ball(this.sprite.x, this.sprite.y, this.sprite.rotation);
-        ballList.push(ballObj);
+        var ballObj = new BALL.ball(this.sprite.x, this.sprite.y, this.sprite.rotation);
+        BALL.ballList.push(ballObj);
     }
 
     setX(value){ this.sprite.x = value; }
