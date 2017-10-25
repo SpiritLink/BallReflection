@@ -12,7 +12,6 @@ PLAYER.player = class{
         this.sprite.rotation = 0;
 
         PLAYER.Container.addChild(this.sprite);
-
     }
 
     // 왼쪽으로 회전

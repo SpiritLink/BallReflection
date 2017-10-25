@@ -7,14 +7,27 @@ BALL.ballList = new Array();
 BALL.speed = 10;
 BALL.ballContainer = new PIXI.Container();
 
+// 좌표 디버그용 함수
+BALL.updateGraphics = function () {
+
+    graphics.clear();
+    for(var i = 0; i < BALL.ballList.length; ++i){
+        graphics.lineStyle(0);
+        graphics.beginFill(0xFF0000, 0.5);
+        graphics.drawCircle(BALL.ballList[i].sprite.x, BALL.ballList[i].sprite.y, 5);
+        graphics.endFill();
+    }
+
+}
+
 BALL.ball = class{
     constructor(x, y, rotation){
         this.sprite = new PIXI.Sprite(BALL.Texture);
-        this.sprite.anchor.set(0.5);
         this.sprite.x = x;
         this.sprite.y = y;
         this.sprite.rotation = rotation;
         this.deleteMe = false
+        this.sprite.anchor.set(0.5);
         BALL.ballContainer.addChild(this.sprite);
     }
 
@@ -44,6 +57,45 @@ BALL.ball = class{
 
     // Y축 충돌
     bounceY(){ this.sprite.rotation = Math.PI - this.sprite.rotation; }
+
+    // 스프라이트간 충돌
+    boundByBound(bound){
+        let isInX = false;
+        let isInY = false;
+
+        console.log(bound.left);
+        console.log(bound.right);
+        console.log(this.sprite.x);
+        console.log(this.sprite.y);
+
+        if(this.sprite.centerX >= bound.x - bound.width / 2 && this.sprite.centerX <= bound.x + bound.width / 2)
+        {
+            console.log("bound Y !");
+            isInX = true;
+        }
+
+
+        if(this.sprite.centerY >= bound.top && this.sprite.centerY <= bound.bottom)
+        {
+            console.log(bound.top);
+            console.log(bound.bottom);
+            console.log("bound X ! ");
+            isInY = true;
+        }
+
+
+        if(isInX == true)
+            this.bounceY();
+
+        if(isInY == true)
+            this.bounceX();
+
+        if(isInX == false && isInY == false)
+        {
+            this.bounceX();
+            this.bounceY();
+        }
+    }
 };
 
 //
@@ -70,6 +122,10 @@ function updateBall(delta){
             {
                 BOX.boxContainer.removeChild(BOX.boxContainer.children[j]);
                 console.log("Collision");
+
+                BALL.ballList[i].boundByBound(BOX.boxContainer.children[j].getBounds());
+
+                // << : 조건에 맞춰서 바운드를 어떻게 할지 결정해 줘야 한다.
             }
         }
     }

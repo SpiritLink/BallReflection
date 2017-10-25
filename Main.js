@@ -14,7 +14,7 @@ let lineLength = 50;        // constant
     app.ticker.add(function(delta){
         updateBall(delta);
         updateKeyboard();
-        updateGraphics();
+        BALL.updateGraphics();
     });
 
 // init Variable
@@ -52,14 +52,5 @@ let lineLength = 50;        // constant
         keySpace.press = player.fireBall.bind(player);
     }
 
-// draw Line
-    function updateGraphics() {
-        graphics.clear();
-        graphics.beginFill(0xFF3300);
-        graphics.lineStyle(4, 0xffd900, 1);
-        graphics.moveTo(player.x, player.y);
-        graphics.lineTo(Math.cos(player.rotation - Math.PI / 2) * lineLength + player.x, Math.sin(player.rotation - Math.PI / 2) * lineLength + player.y);
-        graphics.endFill();
-    }
 
 
