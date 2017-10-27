@@ -2,6 +2,7 @@ class boxMgr{
     constructor(){
         this.Container = new PIXI.Container();
         this.BoxList = new Array();
+        Device.app.ticker.add(this.updateGraphics.bind(this));
     }
 
     update(){
@@ -9,28 +10,28 @@ class boxMgr{
     }
 
     updateGraphics(){
-        for(let i = 0; i < this.Container.length; i++){
+        for(let i = 0; i < this.Container.children.length; i++){
             var rect = this.Container.children[i].getBounds();
 
-            graphics.lineStyle(0);
-            graphics.beginFill(0xFF0000, 0.5);
-            graphics.drawCircle(rect.x , rect.y , 5);
-            graphics.endFill();
+            Device.graphics.lineStyle(0);
+            Device.graphics.beginFill(0xFF0000, 0.5);
+            Device.graphics.drawCircle(rect.x , rect.y , 5);
+            Device.graphics.endFill();
 
-            graphics.lineStyle(0);
-            graphics.beginFill(0xFF0000, 0.5);
-            graphics.drawCircle(rect.x + rect.width, rect.y, 5);
-            graphics.endFill();
+            Device.graphics.lineStyle(0);
+            Device.graphics.beginFill(0xFF0000, 0.5);
+            Device.graphics.drawCircle(rect.x + rect.width, rect.y, 5);
+            Device.graphics.endFill();
 
-            graphics.lineStyle(0);
-            graphics.beginFill(0xFF0000, 0.5);
-            graphics.drawCircle(rect.x + rect.width , rect.y + rect.height, 5);
-            graphics.endFill();
+            Device.graphics.lineStyle(0);
+            Device.graphics.beginFill(0xFF0000, 0.5);
+            Device.graphics.drawCircle(rect.x + rect.width , rect.y + rect.height, 5);
+            Device.graphics.endFill();
 
-            graphics.lineStyle(0);
-            graphics.beginFill(0xFF0000, 0.5);
-            graphics.drawCircle(rect.x , rect.y + rect.height, 5);
-            graphics.endFill();
+            Device.graphics.lineStyle(0);
+            Device.graphics.beginFill(0xFF0000, 0.5);
+            Device.graphics.drawCircle(rect.x , rect.y + rect.height, 5);
+            Device.graphics.endFill();
         }
     }
 
@@ -54,4 +55,3 @@ class boxMgr{
     }
 }
 
-var BoxMGR = new boxMgr();

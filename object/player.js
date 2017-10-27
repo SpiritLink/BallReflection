@@ -38,4 +38,3 @@ class Player{
     setY(value) { this.sprite.y = value; }
 }
 
-var player = new Player(200, 200);

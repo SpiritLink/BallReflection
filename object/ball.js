@@ -3,6 +3,9 @@ class ballMgr{
         this.Container = new PIXI.Container();
         this.ballList = new Array();
         this.speed = 10;
+
+        Device.app.ticker.add(this.updateGraphics.bind(this));
+        Device.app.ticker.add(function(delta){ this.update(delta) }.bind(this) )
     }
 
     update(delta){
@@ -13,13 +16,14 @@ class ballMgr{
 
     updateGraphics(){
         for(let i = 0; i < this.ballList.length; ++i){
-            graphics.lineStyle(0);
-            graphics.beginFill(0xFF0000, 0.5);
-            graphics.drawCircle(this.ballList[i].sprite.x, this.ballList[i].sprite.y, 5);
-            graphics.endFill();
+            Device.graphics.lineStyle(0);
+            Device.graphics.beginFill(0xFF0000, 0.5);
+            Device.graphics.drawCircle(this.ballList[i].sprite.x, this.ballList[i].sprite.y, 5);
+            Device.graphics.endFill();
         }
     }
 
+    // 공 생성 및 추가
     createBall(x, y, rotation){
         var ball = new Object();
         ball.sprite = new PIXI.Sprite(PIXI.Texture.fromImage('required/assets/ball.png'));
@@ -120,5 +124,3 @@ class ballMgr{
         }
     }
 }
-
-var BallMGR = new ballMgr();

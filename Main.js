@@ -1,40 +1,20 @@
-// Properties and Variable
 
-var app, bump, graphics;    // library
-// variable
-
-let lineLength = 50;        // constant
-
+var BallMGR = new ballMgr();
+var BoxMGR = new boxMgr();
+var player = new Player(Device.app.screen.width / 2, Device.app.screen.height / 2);
 // init
     initComponent();
     initField();
 
-// update
-    app.ticker.add(function(delta){
-        graphics.clear();
-        ballCollision(delta);
-        kb.update();
-        BallMGR.updateGraphics();
-        BallMGR.update(delta);
-        BoxMGR.updateGraphics();
-    });
-
 // init Variable
     function initComponent(){
 
-        app = new PIXI.Application(720, 1280, {backgroundColor : 0x1099bb});
-        document.body.appendChild(app.view);
-        graphics = new PIXI.Graphics();
-        bump = new Bump(PIXI);
 
-        player.setX(app.screen.width / 2);
-        player.setY(app.screen.height / 2);
+        Device.stageAddChild(BoxMGR.Container);
+        Device.stageAddChild(BallMGR.Container);
+        Device.stageAddChild(player.Container);
+        Device.init();
 
-        // add Container
-        app.stage.addChild(BoxMGR.Container);
-        app.stage.addChild(BallMGR.Container);
-        app.stage.addChild(player.Container);
-        player.Container.addChild(graphics);    // 현재 플레이어 컨테이너에 임시 설정
     }
 
 // init Field
