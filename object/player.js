@@ -1,10 +1,8 @@
-var PLAYER = PLAYER || {};
-
-PLAYER.Texture = PIXI.Texture.fromImage('required/assets/p.png');
-PLAYER.Container = new PIXI.Container();
-PLAYER.player = class{
+class Player{
     constructor(x, y){
-        this.sprite = new PIXI.Sprite(PLAYER.Texture);
+        this.sprite = new PIXI.Sprite(PIXI.Texture.fromImage('required/assets/p.png'));
+        this.Container = new PIXI.Container();
+
         this.sprite.x = x;
         this.sprite.y = y;
         this.sprite.typeName = 'player';
@@ -15,7 +13,7 @@ PLAYER.player = class{
         kb.addPress(39, this.rotateRight.bind(this));
         kb.addRelease(32, this.fireBall.bind(this));
 
-        PLAYER.Container.addChild(this.sprite);
+        this.Container.addChild(this.sprite);
     }
 
     // 왼쪽으로 회전
@@ -24,22 +22,18 @@ PLAYER.player = class{
         if(this.sprite.rotation < -Math.PI / 2) { this.sprite.rotation = -Math.PI / 2; }
     }
 
-    // 오른쪽으로 회전
     rotateRight(){
-
         this.sprite.rotation += Math.PI / 180;
         if(this.sprite.rotation > Math.PI / 2) { this.sprite.rotation = Math.PI / 2; }
     }
 
-    // 공을 발사하는 함수
     fireBall(){
         var ballObj = new BALL.ball(this.sprite.x, this.sprite.y, this.sprite.rotation);
         BALL.ballList.push(ballObj);
     }
 
-    setX(value){ this.sprite.x = value; }
-    setY(value){ this.sprite.y = value; }
+    setX(value) { this.sprite.x = value; }
+    setY(value) { this.sprite.y = value; }
 }
-// variable (Resource)
 
-var player = new PLAYER.player(200, 200);
+var player = new Player(200, 200);
