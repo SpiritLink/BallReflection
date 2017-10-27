@@ -30,9 +30,9 @@ class ballMgr{
 
         ball.deleteMe = false;
 
-        ball.bounceX = function(){ this.sprite.rotation = -this.sprite.rotation; }.bind(ball);
+        ball.bounceX = function(){ this.sprite.rotation = -this.sprite.rotation; };
         ball.bounceY = function(){ this.sprite.rotation = Math.PI - this.sprite.rotation; }
-        ball.boundByBound = this.boundByBound.bind(ball);
+        ball.boundByBound = this.boundByBound;
 
         this.Container.addChild(ball.sprite);
         this.ballList.push(ball);
