@@ -16,7 +16,7 @@ let lineLength = 50;        // constant
         kb.update();
         BallMGR.updateGraphics();
         BallMGR.update(delta);
-        BOX.updateGraphics();
+        BoxMGR.updateGraphics();
     });
 
 // init Variable
@@ -31,7 +31,7 @@ let lineLength = 50;        // constant
         player.setY(app.screen.height / 2);
 
         // add Container
-        app.stage.addChild(BOX.boxContainer);
+        app.stage.addChild(BoxMGR.Container);
         app.stage.addChild(BallMGR.Container);
         app.stage.addChild(player.Container);
         player.Container.addChild(graphics);    // 현재 플레이어 컨테이너에 임시 설정
@@ -42,8 +42,7 @@ let lineLength = 50;        // constant
 
         for(var i = 0; i <= 1000; i += 50)
         {
-            var box = new BOX.box(i, 100);
-            BOX.boxContainer.addChild(box.sprite);
+            BoxMGR.createBox(i, 100, i / 50);
         }
 
         //var box = new BOX.box(200,200);
