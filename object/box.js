@@ -34,13 +34,14 @@ BOX.updateGraphics = function () {
 
 // 박스 정의
 BOX.box = class{
-    constructor(x, y){
+    constructor(x, y, hp = 5){
         this.sprite = new PIXI.Sprite(BOX.Texture);
         this.sprite.x = x;
         this.sprite.y = y;
         this.sprite.interactive = true;
         this.sprite.anchor.set(0.5);
         this.sprite.scale.set(2);
+        this.sprite.hp = hp;
     }
 
     setX(x) { this.sprite.x = x; }

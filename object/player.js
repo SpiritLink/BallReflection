@@ -22,6 +22,7 @@ PLAYER.player = class{
 
     // 오른쪽으로 회전
     rotateRight(){
+
         this.sprite.rotation += Math.PI / 180;
         if(this.sprite.rotation > Math.PI / 2) { this.sprite.rotation = Math.PI / 2; }
     }

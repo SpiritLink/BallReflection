@@ -14,7 +14,7 @@ let lineLength = 50;        // constant
     app.ticker.add(function(delta){
         graphics.clear();
         updateBall(delta);
-        KEYBOARD.update();
+        //KEYBOARD.update();
         BALL.updateGraphics();
         BOX.updateGraphics();
     });
@@ -38,7 +38,7 @@ let lineLength = 50;        // constant
     }
 
 // init Field
-    function initField(){
+    function initField() {
 
         for(var i = 0; i <= 1000; i += 50)
         {

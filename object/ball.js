@@ -118,7 +118,12 @@ function updateBall(delta){
                 var rect = BOX.boxContainer.children[j].getBounds();
                 BALL.ballList[i].boundByBound(rect);
 
-                BOX.boxContainer.removeChild(BOX.boxContainer.children[j]);
+                BOX.boxContainer.children[j].hp--;
+                if(BOX.boxContainer.children[j].hp <= 0)
+                {
+                    BOX.boxContainer.removeChild(BOX.boxContainer.children[j]);
+                }
+
                 console.log("Collision");
             }
         } // for BOX

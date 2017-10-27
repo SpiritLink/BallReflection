@@ -1,5 +1,40 @@
 var KEYBOARD = KEYBOARD || {};
 
+class Keyboard {
+    static getInstance() {
+        if( !Keyboard.instance ) {
+            Keyboard.instance = new Keyboard();
+        }
+        return Keyboard.instance;
+    }
+
+    constructor() {
+        this.addKey(37);
+        this.addKey(39);
+        window.addEventListener("keydown", this.downHandler, false);
+    }
+
+    addKey(keyCode) {
+        this.keys = this.keys || {};
+        this.keys[keyCode] = false;
+    }
+
+    press() {
+
+    }
+
+    downHandler(event) {
+        for( let i in this.keys ) {
+            if( this.keys.hasOwnProperty(i) ) {
+                if( event.keyCode === i ) {
+                    this.keys[i] = true;
+                }
+            }
+        }
+    }
+}
+
+
 // 키보드 한개에 대한 정의
 KEYBOARD.keyboard = class{
     constructor(keyCode){
@@ -8,8 +43,9 @@ KEYBOARD.keyboard = class{
         this.isUp = true;
         this.press = undefined;
         this.release = undefined;
+
     }
-}
+};
 
 // 키보드 변수
 KEYBOARD.KeyLeft = new KEYBOARD.keyboard(37);
