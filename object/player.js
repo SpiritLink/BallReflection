@@ -16,23 +16,25 @@ class Player{
         this.Container.addChild(this.sprite);
     }
 
-    // 왼쪽으로 회전
+    // 왼 회전
     rotateLeft(){
         this.sprite.rotation -= Math.PI / 180;
         if(this.sprite.rotation < -Math.PI / 2) { this.sprite.rotation = -Math.PI / 2; }
     }
 
+    // 오른 회전
     rotateRight(){
         this.sprite.rotation += Math.PI / 180;
         if(this.sprite.rotation > Math.PI / 2) { this.sprite.rotation = Math.PI / 2; }
     }
 
-    fireBall(){
-        var ballObj = new BALL.ball(this.sprite.x, this.sprite.y, this.sprite.rotation);
-        BALL.ballList.push(ballObj);
-    }
+    // 탄 발사
+    fireBall(){ BallMGR.createBall(this.sprite.x, this.sprite.y, this.sprite.rotation); }
 
+    // X좌표 설정
     setX(value) { this.sprite.x = value; }
+    
+    // Y좌표 설정
     setY(value) { this.sprite.y = value; }
 }
 

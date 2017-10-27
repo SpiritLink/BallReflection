@@ -12,9 +12,10 @@ let lineLength = 50;        // constant
 // update
     app.ticker.add(function(delta){
         graphics.clear();
-        updateBall(delta);
+        ballCollision(delta);
         kb.update();
-        BALL.updateGraphics();
+        BallMGR.updateGraphics();
+        BallMGR.update(delta);
         BOX.updateGraphics();
     });
 
@@ -31,7 +32,7 @@ let lineLength = 50;        // constant
 
         // add Container
         app.stage.addChild(BOX.boxContainer);
-        app.stage.addChild(BALL.ballContainer);
+        app.stage.addChild(BallMGR.Container);
         app.stage.addChild(player.Container);
         player.Container.addChild(graphics);    // 현재 플레이어 컨테이너에 임시 설정
     }
