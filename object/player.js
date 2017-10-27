@@ -12,7 +12,8 @@ PLAYER.player = class{
         this.sprite.rotation = 0;
 
         kb.addPress(37, this.rotateLeft.bind(this));
-        kb.addPress(32, this.fireBall.bind(this));
+        kb.addPress(39, this.rotateRight.bind(this));
+        kb.addRelease(32, this.fireBall.bind(this));
 
         PLAYER.Container.addChild(this.sprite);
     }
@@ -42,5 +43,4 @@ PLAYER.player = class{
 // variable (Resource)
 
 var player = new PLAYER.player(200, 200);
-kb.addPress(32, player.fireBall.bind(player));
 //kb.addPress(32, player.fireBall);

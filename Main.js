@@ -13,6 +13,7 @@ let lineLength = 50;        // constant
     app.ticker.add(function(delta){
         graphics.clear();
         updateBall(delta);
+        kb.update();
         BALL.updateGraphics();
         BOX.updateGraphics();
     });
