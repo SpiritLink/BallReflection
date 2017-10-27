@@ -8,13 +8,11 @@ let lineLength = 50;        // constant
 // init
     initComponent();
     initField();
-    initKeyboard();
 
 // update
     app.ticker.add(function(delta){
         graphics.clear();
         updateBall(delta);
-        //KEYBOARD.update();
         BALL.updateGraphics();
         BOX.updateGraphics();
     });
@@ -49,14 +47,5 @@ let lineLength = 50;        // constant
         //var box = new BOX.box(200,200);
         //BOX.boxContainer.addChild(box.sprite);
     }
-
-// init keyboard event function
-    function initKeyboard(){
-
-        KEYBOARD.KeyLeft.press = player.rotateLeft.bind(player);
-        KEYBOARD.KeyRight.press = player.rotateRight.bind(player);
-        KEYBOARD.KeySpace.press = player.fireBall.bind(player);
-    }
-
 
 

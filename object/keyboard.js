@@ -1,5 +1,3 @@
-var KEYBOARD = KEYBOARD || {};
-
 class Keyboard {
     static getInstance() {
         if( !Keyboard.instance ) {
@@ -11,30 +9,60 @@ class Keyboard {
     constructor() {
         this.addKey(37);
         this.addKey(39);
-        window.addEventListener("keydown", this.downHandler, false);
+        this.addKey(32);
+
+        window.addEventListener("keydown", this.downHandler.bind(this), false);
+        window.addEventListener("keyup", this.upHandler.bind(this), false);
     }
 
     addKey(keyCode) {
         this.keys = this.keys || {};
-        this.keys[keyCode] = false;
+        this.keys[keyCode] = new Object();
+        this.keys[keyCode].isDown = false;
+        this.keys[keyCode].press = undefined;
+        this.keys[keyCode].release = undefined;
     }
 
-    press() {
+    addPress(keyCode, func) {
+        this. keys[keyCode].press = func;
+    }
 
+    addRelease(keyCode, func){
+        this.keys[keyCode].release = func;
     }
 
     downHandler(event) {
         for( let i in this.keys ) {
+
+            /*
+            if(event.keyCode === i.keyCode)
+            {
+                this.keys[i].isDown = true;
+                this.keys[i].press();
+            }
+            */
+            if( this.keys.hasOwnProperty(i) ) {
+                var code = i *= 1;
+                if( event.keyCode === code ) {
+                    this.keys[i].isDown = true;
+                    this.keys[i].press();
+                }
+            }
+
+        }
+    }
+
+    upHandler(event){
+        for( let i in this.keys ) {
             if( this.keys.hasOwnProperty(i) ) {
                 if( event.keyCode === i ) {
-                    this.keys[i] = true;
+                    this.keys[i].isDown = false;
                 }
             }
         }
     }
 }
-
-
+/*
 // 키보드 한개에 대한 정의
 KEYBOARD.keyboard = class{
     constructor(keyCode){
@@ -127,3 +155,6 @@ KEYBOARD.update = function(){
 // 윈도우 이벤트 등록
 window.addEventListener("keydown", KEYBOARD.downHandler.bind(KEYBOARD), false);
 window.addEventListener("keyup", KEYBOARD.upHandler.bind(KEYBOARD), false);
+*/
+
+var kb = Keyboard.getInstance();
