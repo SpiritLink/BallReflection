@@ -26,8 +26,8 @@ class Keyboard {
         this.keys = this.keys || {};
         this.keys[keyCode] = new Object();
         this.keys[keyCode].isDown = false;
-        this.keys[keyCode].press = undefined;
-        this.keys[keyCode].release = undefined;
+        this.keys[keyCode].press = function(){};
+        this.keys[keyCode].release = function(){};
     }
 
     addPress(keyCode, func) {

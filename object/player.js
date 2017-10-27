@@ -43,4 +43,3 @@ PLAYER.player = class{
 // variable (Resource)
 
 var player = new PLAYER.player(200, 200);
-//kb.addPress(32, player.fireBall);
