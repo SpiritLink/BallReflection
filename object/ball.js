@@ -5,8 +5,9 @@ class ballMgr{
         this.speed = 10;
 
         this.isFire = false;
-        this.ballCnt = 1;
+        this.ballMaxCnt = 1;
         this.curBallCnt = 0;
+        this.leftCnt = 0;
 
         this.ballRot = 0;
         this.ballX = 0;
@@ -55,22 +56,23 @@ class ballMgr{
 
     // 제한된 공을 규칙적으로 발사
     intervalFire(x, y, rotation){
-        if(this.isFire == false)
+        if(this.isFire == false && this.leftCnt <= 0)
         {
             this.ballX = x;
             this.ballY = y;
             this.ballRot = rotation;
 
             this.isFire = true;
-            this.curBallCnt = this.ballCnt;
-            this.ballCnt++;
+            this.curBallCnt = this.ballMaxCnt;
+            this.leftCnt = this.ballMaxCnt;
+            this.ballMaxCnt++;
         }
     }
 
     GenerateBall(){
         this.tickCnt++;
 
-        if(this.isFire === true && this.tickCnt > 30) {
+        if(this.isFire === true && this.tickCnt > 15) {
 
             this.tickCnt = 0;
             this.curBallCnt--;
@@ -128,6 +130,10 @@ class ballMgr{
             if (this.ballList[i].deleteMe) {
                 this.Container.removeChild(this.ballList[i].sprite);
                 this.ballList.splice(i, 1);
+                BallMGR.leftCnt--;
+                if(BallMGR.leftCnt == 0) {
+                    Device.nextStage = true;
+                }
                 console.log("Delete Ball !");
             }
         }

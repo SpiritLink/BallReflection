@@ -51,7 +51,25 @@ class boxMgr{
 
         this.Container.addChild(obj.sprite);
         this.BoxList.push(obj);
-
     }
+
+    createMap()
+    {
+        for(var i = 200; i <= 600; i += 50)
+        {
+            this.createBox(i, 100, i / 50);
+        }
+    }
+
+    moveBox(){
+        for(let i = 0; i < this.BoxList.length; i++){
+            this.BoxList[i].sprite.y += 50;
+            if(this.BoxList[i].sprite.y >= Device.app.screen.height / 2){
+                Device.die.renderable = true;
+            }
+        }
+    }
+
+
 }
 

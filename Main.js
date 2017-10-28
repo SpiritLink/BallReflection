@@ -1,8 +1,6 @@
-
-
-    var BallMGR = new ballMgr();
-    var BoxMGR = new boxMgr();
-    var player = new Player(Device.app.screen.width / 2, Device.app.screen.height / 2);
+ var BallMGR = new ballMgr();
+ var BoxMGR = new boxMgr();
+ var player = new Player(Device.app.screen.width / 2, Device.app.screen.height / 2);
 // init
     initComponent();
     initField();
@@ -21,11 +19,14 @@
 // init Field
     function initField() {
 
+        BoxMGR.createMap();
+
+        /*
         for(var i = 0; i <= 1000; i += 50)
         {
             BoxMGR.createBox(i, 100, i / 50);
         }
-
+        */
         //var box = new BOX.box(200,200);
         //BOX.boxContainer.addChild(box.sprite);
     }
