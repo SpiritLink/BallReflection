@@ -4,8 +4,19 @@ class ballMgr{
         this.ballList = new Array();
         this.speed = 10;
 
+        this.isFire = false;
+        this.ballCnt = 1;
+        this.curBallCnt = 0;
+
+        this.ballRot = 0;
+        this.ballX = 0;
+        this.ballY = 0;
+
+        this.tickCnt = 0;
+
         Device.app.ticker.add(this.updateGraphics.bind(this));
         Device.app.ticker.add(function(delta){ this.update(delta) }.bind(this) )
+        Device.app.ticker.add(this.GenerateBall.bind(this));
     }
 
     update(delta){
@@ -24,7 +35,7 @@ class ballMgr{
     }
 
     // 공 생성 및 추가
-    createBall(x, y, rotation){
+    fireBall(x, y, rotation){
         var ball = new Object();
         ball.sprite = new PIXI.Sprite(PIXI.Texture.fromImage('required/assets/ball.png'));
         ball.sprite.x = x;
@@ -40,6 +51,37 @@ class ballMgr{
 
         this.Container.addChild(ball.sprite);
         this.ballList.push(ball);
+    }
+
+    // 제한된 공을 규칙적으로 발사
+    intervalFire(x, y, rotation){
+        if(this.isFire == false)
+        {
+            this.ballX = x;
+            this.ballY = y;
+            this.ballRot = rotation;
+
+            this.isFire = true;
+            this.curBallCnt = this.ballCnt;
+            this.ballCnt++;
+        }
+    }
+
+    GenerateBall(){
+        this.tickCnt++;
+
+        if(this.isFire === true && this.tickCnt > 30) {
+
+            this.tickCnt = 0;
+            this.curBallCnt--;
+
+            this.fireBall(this.ballX, this.ballY, this.ballRot);
+
+            if(this.curBallCnt <= 0){
+                this.isFire = false;
+                this.curBallCnt = 0;
+            }
+        }
     }
 
     // 움직임에 대한 정의
@@ -97,16 +139,16 @@ class ballMgr{
 
         if(this.sprite.centerX >= bound.x && this.sprite.centerX <= bound.x + bound.width)
         {
-            console.log("bound Y !");
+            //console.log("bound Y !");
             isInX = true;
         }
 
 
         if(this.sprite.centerY >= bound.y && this.sprite.centerY <= bound.y + bound.height)
         {
-            console.log(bound.top);
-            console.log(bound.bottom);
-            console.log("bound X ! ");
+            //console.log(bound.top);
+            //console.log(bound.bottom);
+            //console.log("bound X ! ");
             isInY = true;
         }
 

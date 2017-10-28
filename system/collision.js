@@ -17,9 +17,10 @@ function ballCollision(){
                 {
                     BoxMGR.Container.removeChild(BoxMGR.Container.children[j]);
                     BoxMGR.BoxList.splice(j,1);
+                    Device.addScore();
                 }
 
-                console.log("Collision");
+                //console.log("Collision");
             }
         } // for BOX
     } // for BALL

@@ -1,7 +1,8 @@
 
-var BallMGR = new ballMgr();
-var BoxMGR = new boxMgr();
-var player = new Player(Device.app.screen.width / 2, Device.app.screen.height / 2);
+
+    var BallMGR = new ballMgr();
+    var BoxMGR = new boxMgr();
+    var player = new Player(Device.app.screen.width / 2, Device.app.screen.height / 2);
 // init
     initComponent();
     initField();
@@ -9,12 +10,12 @@ var player = new Player(Device.app.screen.width / 2, Device.app.screen.height / 
 // init Variable
     function initComponent(){
 
-
         Device.stageAddChild(BoxMGR.Container);
         Device.stageAddChild(BallMGR.Container);
         Device.stageAddChild(player.Container);
         Device.init();
 
+        // 게임에 대한 로직을 정의한다. ( 총알이 전부 줄었는지 확인, 물체가 밑으로 이동함 )
     }
 
 // init Field

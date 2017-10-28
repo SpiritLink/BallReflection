@@ -12,6 +12,9 @@ class device {
         this.app.ticker.add(this.graphics.clear.bind(this.graphics));
         this.bump = new Bump(PIXI);
 
+        // 임시
+        this.score = 0;
+
         document.body.appendChild(this.app.view);
 
     }
@@ -22,6 +25,11 @@ class device {
 
     init(){
         this.stageAddChild(this.graphics);
+    }
+
+    addScore(){
+        this.score += 5;
+        console.log("점수 : " + this.score);
     }
 }
 

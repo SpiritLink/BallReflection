@@ -29,7 +29,7 @@ class Player{
     }
 
     // 탄 발사
-    fireBall(){ BallMGR.createBall(this.sprite.x, this.sprite.y, this.sprite.rotation); }
+    fireBall(){ BallMGR.intervalFire(this.sprite.x, this.sprite.y, this.sprite.rotation); }
 
     // X좌표 설정
     setX(value) { this.sprite.x = value; }
