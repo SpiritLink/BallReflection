@@ -41,21 +41,10 @@ class ballMgr{
 
     // 공 생성 및 추가 (오브젝트 풀)
     fireBall(x, y, rotation){
-        var ball = new Object();
-        ball.sprite = new PIXI.Sprite(PIXI.Texture.fromImage('required/assets/ball.png'));
-        ball.sprite.x = x;
-        ball.sprite.y = y;
-        ball.sprite.rotation = rotation;
-        ball.sprite.anchor.set(0.5);
+        var ballObj = new ball(x, y, rotation);
 
-        ball.deleteMe = false;
-
-        ball.bounceX = function(){ this.sprite.rotation = -this.sprite.rotation; };
-        ball.bounceY = function(){ this.sprite.rotation = Math.PI - this.sprite.rotation; }
-        ball.boundByBound = this.boundByBound;
-
-        this.Container.addChild(ball.sprite);
-        this.ballList.push(ball);
+        this.Container.addChild(ballObj.sprite);
+        this.ballList.push(ballObj);
     }
 
     // 제한된 공을 규칙적으로 발사
@@ -101,30 +90,7 @@ class ballMgr{
     // 반사에 대한 정의
     reflection(){
         for(let i = 0; i < this.ballList.length; i++){
-
-            // 왼 충돌
-            if(this.ballList[i].sprite.x < 0) {
-                this.ballList[i].bounceX();
-                this.ballList[i].sprite.x = 10;
-            }
-
-            // 오른 충돌
-            if(this.ballList[i].sprite.x > 720){
-                this.ballList[i].bounceX();
-                this.ballList[i].sprite.x = 710;
-            }
-
-            // 위 충돌
-            if(this.ballList[i].sprite.y < 0){
-                this.ballList[i].bounceY();
-                this.ballList[i].sprite.y = 10;
-            }
-
-            // 아래 충돌
-            if(this.ballList[i].sprite.y > 1280){
-                this.ballList[i].bounceY();
-                this.ballList[i].deleteMe = true;
-            }
+this.ballList[i].reflection();
         }
     }
 
@@ -132,16 +98,60 @@ class ballMgr{
     deleteBall() {
         for(let i = 0; i < this.ballList.length; i++) {
             if (this.ballList[i].deleteMe) {
+
                 this.Container.removeChild(this.ballList[i].sprite);
                 this.ballList.splice(i, 1);
-                BallMGR.leftCnt--;
-                if(BallMGR.leftCnt == 0) {
+
+                this.leftCnt--;
+                if(this.leftCnt == 0) {
                     Device.nextStage = true;
                 }
                 console.log("Delete Ball !");
             }
         }
     }
+}
+
+class ball{
+    constructor(x, y, rot){
+        this.sprite = new PIXI.Sprite(PIXI.Texture.fromImage('required/assets/ball.png'));
+        this.sprite.x = x;
+        this.sprite.y = y;
+        this.sprite.rotation = rot;
+        this.sprite.anchor.set(0.5);
+
+        this.deleteMe = false;
+    }
+
+    reflection(){
+        if(this.sprite.x < 0) {
+            this.bounceX();
+            this.sprite.x = 10;
+        }
+
+        // 오른 충돌
+        if(this.sprite.x > 720){
+            this.bounceX();
+            this.sprite.x = 710;
+        }
+
+        // 위 충돌
+        if(this.sprite.y < 0){
+            this.bounceY();
+            this.sprite.y = 10;
+        }
+
+        // 아래 충돌
+        if(this.sprite.y > 1280){
+            this.bounceY();
+            this.deleteMe = true;
+        }
+    }
+
+
+    bounceX(){ this.sprite.rotation = -this.sprite.rotation; }
+
+    bounceY(){ this.sprite.rotation = Math.PI - this.sprite.rotation; }
 
     boundByBound(bound){
         let isInX = false;
@@ -149,16 +159,12 @@ class ballMgr{
 
         if(this.sprite.centerX >= bound.x && this.sprite.centerX <= bound.x + bound.width)
         {
-            //console.log("bound Y !");
             isInX = true;
         }
 
 
         if(this.sprite.centerY >= bound.y && this.sprite.centerY <= bound.y + bound.height)
         {
-            //console.log(bound.top);
-            //console.log(bound.bottom);
-            //console.log("bound X ! ");
             isInY = true;
         }
 
@@ -175,4 +181,5 @@ class ballMgr{
             this.bounceY();
         }
     }
+
 }

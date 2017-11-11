@@ -2,6 +2,7 @@ Device.app.ticker.add( function(){ballCollision()} );
 
 function ballCollision(){
 
+    /*
     // 공과 물체간 충돌 확인 및 제거
     for(var i = 0; i < BallMGR.ballList.length; i++)
     {
@@ -24,4 +25,6 @@ function ballCollision(){
             }
         } // for BOX
     } // for BALL
+
+    */
 }
