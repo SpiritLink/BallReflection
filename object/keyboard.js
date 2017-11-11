@@ -14,7 +14,7 @@ class Keyboard {
         window.addEventListener("keydown", this.downHandler.bind(this), false);
         window.addEventListener("keyup", this.upHandler.bind(this), false);
 
-        Device.app.ticker.add( this.update.bind(this) );
+        Device.app.ticker.add(this.update.bind(this));
     }
 
     update(){

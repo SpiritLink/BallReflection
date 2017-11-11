@@ -1,7 +1,6 @@
 class Player{
     constructor(x, y){
         this.sprite = new PIXI.Sprite(PIXI.Texture.fromImage('required/assets/p.png'));
-        this.Container = new PIXI.Container();
 
         this.sprite.x = x;
         this.sprite.y = y;
@@ -13,7 +12,7 @@ class Player{
         kb.addPress(39, this.rotateRight.bind(this));
         kb.addRelease(32, this.fireBall.bind(this));
 
-        this.Container.addChild(this.sprite);
+        Device.depth3.addChild(this.sprite);
     }
 
     // 왼 회전
@@ -32,13 +31,9 @@ class Player{
     fireBall(){
         if(BallMGR.leftCnt === 0) {
             //parseInt() String을 Int로 변환
-
             BallMGR.intervalFire(this.sprite.x, this.sprite.y, this.sprite.rotation);
-
         }
     }
-
-
 
     // X좌표 설정
     setX(value) { this.sprite.x = value; }

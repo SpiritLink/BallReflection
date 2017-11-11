@@ -2,7 +2,6 @@
 // ball Class 추가, AutoDetectRender 확인
 class ballMgr{
     constructor(){
-        this.Container = new PIXI.Container();
         this.ballList = []; // new 와 차이점이 있다.
         this.speed = 10;
 
@@ -11,40 +10,35 @@ class ballMgr{
         this.curBallCnt = 0;
         this.leftCnt = 0;   // 명확하게 (중복되는 느낌이 안들도록) removed
 
-        this.ballRot = 0;
+        this.ballRotation = 0;
         this.ballX = 0;
         this.ballY = 0;
 
         this.tickCnt = 0;
-        //var self = this;
 
-        Device.app.ticker.add(this.updateGraphics.bind(this));
-        //Device.app.ticker.add(self.update.bind(self));   // Self로 할경우
-        Device.app.ticker.add(this.update.bind(this));  // Self로 변경 (Self로 할시 Remove가 어려워진다)
-        Device.app.ticker.add(this.GenerateBall.bind(this));
+        Device.app.ticker.add(this.update.bind(this));
+        Device.app.ticker.add(this.lateUpdate.bind(this));
+
+        //var self = this;
+        //Device.app.ticker.add(self.update.bind(self));   // Self로 할경우 (Self로 할시 Remove가 어려워진다)
     }
 
+    // 업데이트
     update(){
-        this.move(arguments[0]);    // 인자
-        this.reflection();
+        for(let i = 0; i < this.ballList.length; i++)
+        {
+            this.ballList[i].update(arguments[0]);
+        }
+        this.GenerateBall();
         this.deleteBall();
     }
 
-    updateGraphics(){
-        for(let i = 0; i < this.ballList.length; ++i){
-            Device.graphics.lineStyle(0);
-            Device.graphics.beginFill(0xFF0000, 0.5);
-            Device.graphics.drawCircle(this.ballList[i].sprite.x, this.ballList[i].sprite.y, 5);
-            Device.graphics.endFill();
+    // 늦은 업데이트
+    lateUpdate(){
+        for(let i = 0; i < this.ballList.length; i++)
+        {
+            this.ballList[i].lateUpdate();
         }
-    }
-
-    // 공 생성 및 추가 (오브젝트 풀)
-    fireBall(x, y, rotation){
-        var ballObj = new ball(x, y, rotation);
-
-        this.Container.addChild(ballObj.sprite);
-        this.ballList.push(ballObj);
     }
 
     // 제한된 공을 규칙적으로 발사
@@ -53,7 +47,7 @@ class ballMgr{
         {
             this.ballX = x;
             this.ballY = y;
-            this.ballRot = rotation;
+            this.ballRotation = rotation;
 
             this.isFire = true;
             this.curBallCnt = this.ballMaxCnt;
@@ -62,6 +56,7 @@ class ballMgr{
         }
     }
 
+    // ball을 생성하는 함수
     GenerateBall(){
         this.tickCnt++;
 
@@ -70,7 +65,10 @@ class ballMgr{
             this.tickCnt = 0;
             this.curBallCnt--;
 
-            this.fireBall(this.ballX, this.ballY, this.ballRot);
+            // fireBall 에서 옮김
+            let ballObj = new ball(this.ballX, this.ballY, this.ballRotation);
+            Device.stageAddChild(2, ballObj.sprite);
+            this.ballList.push(ballObj);
 
             if(this.curBallCnt <= 0){
                 this.isFire = false;
@@ -79,27 +77,13 @@ class ballMgr{
         }
     }
 
-    // 움직임에 대한 정의
-    move(delta){
-        for(let i = 0; i < this.ballList.length; i++){
-            this.ballList[i].sprite.x += Math.cos(this.ballList[i].sprite.rotation - Math.PI / 2) * delta * this.speed;
-            this.ballList[i].sprite.y += Math.sin(this.ballList[i].sprite.rotation - Math.PI / 2) * delta * this.speed;
-        }
-    }
-
-    // 반사에 대한 정의
-    reflection(){
-        for(let i = 0; i < this.ballList.length; i++){
-this.ballList[i].reflection();
-        }
-    }
-
     // 사라진 공을 삭제한다.
     deleteBall() {
         for(let i = 0; i < this.ballList.length; i++) {
+
             if (this.ballList[i].deleteMe) {
 
-                this.Container.removeChild(this.ballList[i].sprite);
+                Device.depth2.removeChild(this.ballList[i].sprite); // Device에서 자동으로 찾을수 있도록 변경
                 this.ballList.splice(i, 1);
 
                 this.leftCnt--;
@@ -108,11 +92,14 @@ this.ballList[i].reflection();
                 }
                 console.log("Delete Ball !");
             }
+
         }
     }
 }
 
+// 투사체 공에 대한 정의
 class ball{
+    // x, y, 회전값 지정 후 생성
     constructor(x, y, rot){
         this.sprite = new PIXI.Sprite(PIXI.Texture.fromImage('required/assets/ball.png'));
         this.sprite.x = x;
@@ -120,9 +107,31 @@ class ball{
         this.sprite.rotation = rot;
         this.sprite.anchor.set(0.5);
 
+        this.speed = 10;
         this.deleteMe = false;
     }
 
+    // 업데이트
+    update(delta){
+        this.move(delta);    // 인자
+        this.reflection();
+    }
+
+    // 늦은 업데이트 (디버그 용으로 사용)
+    lateUpdate(){
+        Device.graphics.lineStyle(0);
+        Device.graphics.beginFill(0xFF0000, 0.5);
+        Device.graphics.drawCircle(this.sprite.x, this.sprite.y, 5);
+        Device.graphics.endFill();
+    }
+
+    // 이동
+    move(delta){
+        this.sprite.x += Math.cos(this.sprite.rotation - Math.PI / 2) * delta * this.speed;
+        this.sprite.y += Math.sin(this.sprite.rotation - Math.PI / 2) * delta * this.speed;
+    }
+
+    // 반사
     reflection(){
         if(this.sprite.x < 0) {
             this.bounceX();
@@ -148,11 +157,13 @@ class ball{
         }
     }
 
-
+    // X축 반사
     bounceX(){ this.sprite.rotation = -this.sprite.rotation; }
 
+    // Y축 반사
     bounceY(){ this.sprite.rotation = Math.PI - this.sprite.rotation; }
 
+    // 다른 스프라이트와 충돌시 처리
     boundByBound(bound){
         let isInX = false;
         let isInY = false;

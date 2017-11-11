@@ -7,11 +7,17 @@
 
 // init Variable
     function initComponent(){
-
-        Device.stageAddChild(BoxMGR.Container);
-        Device.stageAddChild(BallMGR.Container);
-        Device.stageAddChild(player.Container);
         Device.init();
+
+        // 생각한대로 안됨
+
+        /*
+        Device.functions += ballMgr.update;
+        Device.lateFunctions += ballMgr.lateUpdate;
+
+        Device.functions += boxMgr.update;
+        Device.lateFunctions += ballMgr.lateUpdate;
+*/
 
         // 게임에 대한 로직을 정의한다. ( 총알이 전부 줄었는지 확인, 물체가 밑으로 이동함 )
     }

@@ -1,55 +1,23 @@
 class boxMgr{
     constructor(){
-        this.Container = new PIXI.Container();
         this.BoxList = new Array();
-        Device.app.ticker.add(this.updateGraphics.bind(this));
+
+        Device.app.ticker.add(this.update.bind(this));
+        Device.app.ticker.add(this.lateUpdate.bind(this));
     }
 
+    // 업데이트
     update(){
 
     }
 
-    updateGraphics(){
-        for(let i = 0; i < this.Container.children.length; i++){
-            var rect = this.Container.children[i].getBounds();
-
-            Device.graphics.lineStyle(0);
-            Device.graphics.beginFill(0xFF0000, 0.5);
-            Device.graphics.drawCircle(rect.x , rect.y , 5);
-            Device.graphics.endFill();
-
-            Device.graphics.lineStyle(0);
-            Device.graphics.beginFill(0xFF0000, 0.5);
-            Device.graphics.drawCircle(rect.x + rect.width, rect.y, 5);
-            Device.graphics.endFill();
-
-            Device.graphics.lineStyle(0);
-            Device.graphics.beginFill(0xFF0000, 0.5);
-            Device.graphics.drawCircle(rect.x + rect.width , rect.y + rect.height, 5);
-            Device.graphics.endFill();
-
-            Device.graphics.lineStyle(0);
-            Device.graphics.beginFill(0xFF0000, 0.5);
-            Device.graphics.drawCircle(rect.x , rect.y + rect.height, 5);
-            Device.graphics.endFill();
-        }
+    // 늦은 업데이트
+    lateUpdate(){
     }
 
     createBox(x, y, HP){
-        var obj = new Object();
-        obj.sprite = new PIXI.Sprite(PIXI.Texture.fromImage('required/assets/box1.png'));
-        obj.sprite.x = x;
-        obj.sprite.y = y;
-        obj.sprite.interactive = true;
-        obj.sprite.anchor.set(0.5);
-        obj.sprite.scale.set(2);
-
-        obj.hp = HP;
-
-        obj.setX = function(x){ this.sprite.x = x; }
-        obj.setY = function(y){ this.sprite.y = y; }
-
-        this.Container.addChild(obj.sprite);
+        var obj = new box(x,y,HP);
+        Device.depth1.addChild(obj.sprite);
         this.BoxList.push(obj);
     }
 
@@ -69,7 +37,27 @@ class boxMgr{
             }
         }
     }
+}
 
+class box{
+    constructor(x, y, HP){
+        this.sprite = new PIXI.Sprite(PIXI.Texture.fromImage('required/assets/box1.png'));
+        this.sprite.x = x;
+        this.sprite.y = y;
+        this.sprite.interactive = true;
+        this.sprite.anchor.set(0.5);
+        this.sprite.scale.set(2);
+
+        this.hp = HP;
+    }
+
+    setX(value){
+        this.x = value;
+    }
+
+    setY(value){
+        this.y = value;
+    }
 
 }
 
