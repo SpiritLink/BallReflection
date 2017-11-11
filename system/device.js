@@ -11,7 +11,8 @@ class device {
         this.app = new PIXI.Application(720, 1280, {backgroundColor : 0x1099bb});
         this.graphics = new PIXI.Graphics();
         this.bump = new Bump(PIXI);
-        this.text = undefined;
+        this.pointText = undefined;
+        this.maxBallCntText = undefined;
 
         this.ealryFunctions = new Array();
         this.functions = new Array();
@@ -84,17 +85,26 @@ class device {
             wordWrapWidth: 440
         });
 
-        this.text = new PIXI.Text('Rich Text', style);
-        this.text.x = 0;
-        this.text.y = 0;
-        this.app.stage.addChild(this.text);
+        this.pointText = new PIXI.Text('점수 : 0 ', style);
+        this.pointText.x = 0;
+        this.pointText.y = 0;
+        this.depth4.addChild(this.pointText);
 
+        this.maxBallCntText = new PIXI.Text("볼 카운팅", style);
+        this.maxBallCntText.x = 0;
+        this.maxBallCntText.y = 50;
+        this.depth4.addChild(this.maxBallCntText);
     }
 
+    setMaxBallCnt(cnt){
+        if(this.maxBallCntText != undefined){
+            this.maxBallCntText.text = "볼 개수 :" + cnt;
+        }
+    }
     addScore(){
         this.score += 5;
         console.log("점수 : " + this.score);
-        this.text.text = "점수 : " + this.score;
+        this.pointText.text = "점수 : " + this.score;
     }
 
     // 이전 업데이트
@@ -117,7 +127,7 @@ class device {
 
         if(this.nextStage == true){
             BoxMGR.moveBox();
-            BoxMGR.createMap();
+            BoxMGR.createLine();
             this.nextStage = false;
         }
     }

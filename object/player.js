@@ -15,6 +15,12 @@ class Player{
         Device.depth3.addChild(this.sprite);
     }
 
+    update(){
+    }
+
+    lateUpdate(){
+
+    }
     // 왼 회전
     rotateLeft(){
         this.sprite.rotation -= Math.PI / 180;
