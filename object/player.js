@@ -28,9 +28,11 @@ class Player{
         if(this.sprite.rotation > Math.PI / 2) { this.sprite.rotation = Math.PI / 2; }
     }
 
-    // 탄 발사
+    // 탄 발사 (=== 으로 통일)
     fireBall(){
-        if(BallMGR.leftCnt == 0) {
+        if(BallMGR.leftCnt === 0) {
+            //parseInt() String을 Int로 변환
+
             BallMGR.intervalFire(this.sprite.x, this.sprite.y, this.sprite.rotation);
 
         }

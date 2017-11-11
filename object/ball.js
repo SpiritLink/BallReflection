@@ -1,27 +1,31 @@
+
+// ball Class 추가, AutoDetectRender 확인
 class ballMgr{
     constructor(){
         this.Container = new PIXI.Container();
-        this.ballList = new Array();
+        this.ballList = []; // new 와 차이점이 있다.
         this.speed = 10;
 
         this.isFire = false;
         this.ballMaxCnt = 1;
         this.curBallCnt = 0;
-        this.leftCnt = 0;
+        this.leftCnt = 0;   // 명확하게 (중복되는 느낌이 안들도록) removed
 
         this.ballRot = 0;
         this.ballX = 0;
         this.ballY = 0;
 
         this.tickCnt = 0;
+        //var self = this;
 
         Device.app.ticker.add(this.updateGraphics.bind(this));
-        Device.app.ticker.add(function(delta){ this.update(delta) }.bind(this) )
+        //Device.app.ticker.add(self.update.bind(self));   // Self로 할경우
+        Device.app.ticker.add(this.update.bind(this));  // Self로 변경 (Self로 할시 Remove가 어려워진다)
         Device.app.ticker.add(this.GenerateBall.bind(this));
     }
 
-    update(delta){
-        this.move(delta);
+    update(){
+        this.move(arguments[0]);    // 인자
         this.reflection();
         this.deleteBall();
     }
@@ -35,7 +39,7 @@ class ballMgr{
         }
     }
 
-    // 공 생성 및 추가
+    // 공 생성 및 추가 (오브젝트 풀)
     fireBall(x, y, rotation){
         var ball = new Object();
         ball.sprite = new PIXI.Sprite(PIXI.Texture.fromImage('required/assets/ball.png'));
