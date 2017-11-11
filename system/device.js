@@ -11,6 +11,7 @@ class device {
         this.app = new PIXI.Application(720, 1280, {backgroundColor : 0x1099bb});
         this.graphics = new PIXI.Graphics();
         this.bump = new Bump(PIXI);
+        this.text = undefined;
 
         this.ealryFunctions = new Array();
         this.functions = new Array();
@@ -65,11 +66,35 @@ class device {
         this.die = new PIXI.Sprite(PIXI.Texture.fromImage('required/assets/Die.jpg'));
         this.die.renderable = false;
         this.depth4.addChild(this.die);
+
+        var style = new PIXI.TextStyle({
+            fontFamily: 'Arial',
+            fontSize: 36,
+            fontStyle: 'italic',
+            fontWeight: 'bold',
+            fill: ['#ffffff', '#00ff99'], // gradient
+            stroke: '#4a1850',
+            strokeThickness: 5,
+            dropShadow: true,
+            dropShadowColor: '#000000',
+            dropShadowBlur: 4,
+            dropShadowAngle: Math.PI / 6,
+            dropShadowDistance: 6,
+            wordWrap: true,
+            wordWrapWidth: 440
+        });
+
+        this.text = new PIXI.Text('Rich Text', style);
+        this.text.x = 0;
+        this.text.y = 0;
+        this.app.stage.addChild(this.text);
+
     }
 
     addScore(){
         this.score += 5;
         console.log("점수 : " + this.score);
+        this.text.text = "점수 : " + this.score;
     }
 
     // 이전 업데이트

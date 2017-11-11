@@ -8,7 +8,7 @@ class boxMgr{
 
     // 업데이트
     update(){
-
+        this.checkHP();
     }
 
     // 늦은 업데이트
@@ -34,6 +34,18 @@ class boxMgr{
             this.BoxList[i].sprite.y += 50;
             if(this.BoxList[i].sprite.y >= Device.app.screen.height / 2){
                 Device.die.renderable = true;
+            }
+        }
+    }
+
+    checkHP(){
+        for(let i = 0; i < this.BoxList.length; i++)
+        {
+            if(this.BoxList[i].hp <= 0)
+            {
+                Device.depth1.removeChild(this.BoxList[i].sprite);
+                this.BoxList.splice(i, 1);
+                Device.addScore();
             }
         }
     }

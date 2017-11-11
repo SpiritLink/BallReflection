@@ -115,6 +115,7 @@ class ball{
     update(delta){
         this.move(delta);    // 인자
         this.reflection();
+        this.collisionCheck();
     }
 
     // 늦은 업데이트 (디버그 용으로 사용)
@@ -191,6 +192,20 @@ class ball{
             this.bounceX();
             this.bounceY();
         }
+    }
+
+    collisionCheck(){
+        for(let i = 0; i < BoxMGR.BoxList.length; i++)
+        {
+            if(Device.bump.hitTestRectangle(this.sprite, BoxMGR.BoxList[i].sprite))
+            {
+                var rect = BoxMGR.BoxList[i].sprite.getBounds();
+                this.boundByBound(rect);
+
+                BoxMGR.BoxList[i].hp--;
+                //console.log("Collision");
+            }
+        } // for BOX
     }
 
 }
