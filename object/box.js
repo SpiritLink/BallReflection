@@ -29,7 +29,7 @@ class boxMgr{
 
     // 박스 생성 (Number에 따른 위치 정의)
     createBox(number){
-        var obj = new box(200 + number * 50,100,Math.floor((this.createCnt / 3)) + 1);
+        var obj = new box(100 + number * 50,100,Math.floor((this.createCnt / 3)) + 1);
         Device.depth1.addChild(obj.sprite);
         this.BoxList.push(obj);
         Device.depth4.addChild(obj.text);
@@ -71,6 +71,7 @@ class boxMgr{
     checkHP(){
         for(let i = 0; i < this.BoxList.length; i++)
         {
+            this.BoxList[i].text.text = this.BoxList[i].hp;
             if(this.BoxList[i].hp <= 0)
             {
                 Device.depth1.removeChild(this.BoxList[i].sprite);
@@ -185,6 +186,7 @@ class box{
         this.text = new PIXI.Text(HP);
         this.text.x = x;
         this.text.y = y;
+        this.text.anchor.set(0.5);
     }
 
     update(){
