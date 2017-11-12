@@ -15,14 +15,14 @@ class ballMgr{
         this.ballY = 0;
 
         this.tickCnt = 0;
-
+/*
         Device.functions.push(this.update.bind(this));
         Device.lateFunctions.push(this.lateUpdate.bind(this));
+*/
 
-        /*
         Device.app.ticker.add(this.update.bind(this));
         Device.app.ticker.add(this.lateUpdate.bind(this));
-*/
+
         //var self = this;
         //Device.app.ticker.add(self.update.bind(self));   // Self로 할경우 (Self로 할시 Remove가 어려워진다)
     }
