@@ -71,7 +71,7 @@ class ballMgr{
             this.curBallCnt--;
 
             // fireBall 에서 옮김
-            let ballObj = new ball(this.ballX, this.ballY, this.ballRotation);
+            let ballObj = new normalWeapon(this.ballX, this.ballY, this.ballRotation);
             Device.stageAddChild(2, ballObj.sprite);
             this.ballList.push(ballObj);
 
@@ -100,117 +100,4 @@ class ballMgr{
 
         }
     }
-}
-
-// 투사체 공에 대한 정의
-class ball{
-    // x, y, 회전값 지정 후 생성
-    constructor(x, y, rot){
-        this.sprite = new PIXI.Sprite(PIXI.Texture.fromImage('required/assets/ball.png'));
-        this.sprite.x = x;
-        this.sprite.y = y;
-        this.sprite.rotation = rot;
-        this.sprite.anchor.set(0.5);
-
-        this.speed = 10;
-        this.deleteMe = false;
-    }
-
-    // 업데이트
-    update(delta){
-        this.move(delta);    // 인자
-        this.reflection();
-        this.collisionCheck();
-    }
-
-    // 늦은 업데이트 (디버그 용으로 사용)
-    lateUpdate(){
-        Device.graphics.lineStyle(0);
-        Device.graphics.beginFill(0xFF0000, 0.5);
-        Device.graphics.drawCircle(this.sprite.x, this.sprite.y, 5);
-        Device.graphics.endFill();
-    }
-
-    // 이동
-    move(delta){
-        this.sprite.x += Math.cos(this.sprite.rotation - Math.PI / 2) * delta * this.speed;
-        this.sprite.y += Math.sin(this.sprite.rotation - Math.PI / 2) * delta * this.speed;
-    }
-
-    // 반사
-    reflection(){
-        if(this.sprite.x < 0) {
-            this.bounceX();
-            this.sprite.x = 10;
-        }
-
-        // 오른 충돌
-        if(this.sprite.x > 720){
-            this.bounceX();
-            this.sprite.x = 710;
-        }
-
-        // 위 충돌
-        if(this.sprite.y < 0){
-            this.bounceY();
-            this.sprite.y = 10;
-        }
-
-        // 아래 충돌
-        if(this.sprite.y > 1280){
-            this.bounceY();
-            this.deleteMe = true;
-        }
-    }
-
-    // X축 반사
-    bounceX(){ this.sprite.rotation = -this.sprite.rotation; }
-
-    // Y축 반사
-    bounceY(){ this.sprite.rotation = Math.PI - this.sprite.rotation; }
-
-    // 다른 스프라이트와 충돌시 처리
-    boundByBound(bound){
-        let isInX = false;
-        let isInY = false;
-
-        if(this.sprite.centerX >= bound.x && this.sprite.centerX <= bound.x + bound.width)
-        {
-            isInX = true;
-        }
-
-
-        if(this.sprite.centerY >= bound.y && this.sprite.centerY <= bound.y + bound.height)
-        {
-            isInY = true;
-        }
-
-
-        if(isInX === true)
-            this.bounceY();
-
-        if(isInY === true)
-            this.bounceX();
-
-        if(isInX === false && isInY === false)
-        {
-            this.bounceX();
-            this.bounceY();
-        }
-    }
-
-    collisionCheck(){
-        for(let i = 0; i < BoxMGR.BoxList.length; i++)
-        {
-            if(Device.bump.hitTestRectangle(this.sprite, BoxMGR.BoxList[i].sprite))
-            {
-                var rect = BoxMGR.BoxList[i].sprite.getBounds();
-                this.boundByBound(rect);
-
-                BoxMGR.BoxList[i].hp--;
-                //console.log("Collision");
-            }
-        } // for BOX
-    }
-
 }
