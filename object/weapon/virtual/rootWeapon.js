@@ -1,8 +1,8 @@
 class rootWeapon{
 
     // 모든 무기가 가지는 공통부분 정의
-    constructor(x, y, rot){
-        this.sprite = new PIXI.Sprite(PIXI.Texture.fromImage('required/assets/ball.png'));
+    constructor(x, y, rot, spriteName){
+        this.sprite = new PIXI.Sprite(PIXI.Texture.fromImage(spriteName));
         this.sprite.anchor.set(0.5);
         this.sprite.x = x;
         this.sprite.y = y;

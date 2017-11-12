@@ -1,6 +1,6 @@
 class normalWeapon extends rootWeapon{
     constructor(x, y, rot){
-        super(x, y, rot);
+        super(x, y, rot,'required/assets/ball.png');
         this.speed = 10;    // 무기에 따른 개별적인 속도
     }
 

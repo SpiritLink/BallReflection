@@ -1,4 +1,3 @@
-
 // ball Class 추가, AutoDetectRender 확인
 class ballMgr{
     constructor(){
@@ -15,10 +14,10 @@ class ballMgr{
         this.ballY = 0;
 
         this.tickCnt = 0;
-/*
-        Device.functions.push(this.update.bind(this));
-        Device.lateFunctions.push(this.lateUpdate.bind(this));
-*/
+        /*
+                Device.functions.push(this.update.bind(this));
+                Device.lateFunctions.push(this.lateUpdate.bind(this));
+        */
 
         Device.app.ticker.add(this.update.bind(this));
         Device.app.ticker.add(this.lateUpdate.bind(this));
