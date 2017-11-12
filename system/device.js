@@ -122,7 +122,7 @@ class device {
 
         for(let i = 0; i < this.functions.length; i++)
         {
-            this.functions[i];
+            this.functions[i]();
         }
 
         if(this.nextStage == true){
