@@ -1,4 +1,3 @@
- var BallMGR = new ballMgr();
  var BoxMGR = new boxMgr();
  var player = new Player(Device.app.screen.width / 2, Device.app.screen.height / 2);
 // init

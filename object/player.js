@@ -15,6 +15,10 @@ class Player{
         Device.depth3.addChild(this.sprite);
     }
 
+    Init(ballMgr){
+        this.BallMgr = ballMgr;
+    }
+
     update(){
     }
 
@@ -35,9 +39,9 @@ class Player{
 
     // 탄 발사 (=== 으로 통일)
     fireBall(){
-        if(BallMGR.leftCnt === 0) {
+        if(this.BallMgr.leftCnt === 0) {
             //parseInt() String을 Int로 변환
-            BallMGR.intervalFire(this.sprite.x, this.sprite.y, this.sprite.rotation);
+            this.BallMgr.intervalFire(this.sprite.x, this.sprite.y, this.sprite.rotation);
         }
     }
 
