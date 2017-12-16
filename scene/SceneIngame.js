@@ -8,6 +8,7 @@ class SceneIngame extends SceneRoot{
         this.player = new Player(Device.app.screen.width / 2, Device.app.screen.height / 2);
 
         this.player.Init(this.BallMGR);
+        this.BoxMGR.createLine();
     }
 
     Update(){
