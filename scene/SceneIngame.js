@@ -9,10 +9,12 @@ class SceneIngame extends SceneRoot{
 
         this.player.Init(this.BallMGR);
         this.BoxMGR.createLine();
+
     }
 
     Update(){
         super.Update();
+        console.log("Log !");
     }
 
     Render(){

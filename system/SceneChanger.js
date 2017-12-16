@@ -14,10 +14,14 @@ class SceneChanger{
         switch(SceneState){
             case "Ingame":
                 this.currentScene = new SceneIngame();
+
                 break;
             case "Intro":
                 this.currentScene = new SceneIntro();
                 break;
         }
+
+        this.currentScene.Init();
+        Device.app.ticker.add(this.currentScene.update);
     }
 }
