@@ -89,6 +89,7 @@ class rootWeapon{
 
     // 충돌 체크
     collisionCheck(){
+        /*
         for(let i = 0; i < BoxMGR.BoxList.length; i++)
         {
             if(Device.bump.hitTestRectangle(this.sprite, BoxMGR.BoxList[i].sprite))
@@ -100,6 +101,7 @@ class rootWeapon{
                 //console.log("Collision");
             }
         } // for BOX
+        */
     }
 
 }

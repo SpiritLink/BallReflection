@@ -38,7 +38,6 @@ class device {
 
         // 임시
         this.score = 0;
-        this.nextStage = false;
         this.Container = new PIXI.Container();
 
         // body 추가
@@ -123,12 +122,6 @@ class device {
         for(let i = 0; i < this.functions.length; i++)
         {
             this.functions[i]();
-        }
-
-        if(this.nextStage == true){
-            BoxMGR.moveBox();
-            BoxMGR.createLine();
-            this.nextStage = false;
         }
     }
 
