@@ -6,7 +6,7 @@ initField();
 // init Variable
     function initComponent(){
         Device.init();
-        SceneManager.ChangeScene("Ingame");
+        SceneManager.ChangeScene("Intro");
 
     }
 
