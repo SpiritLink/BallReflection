@@ -1,8 +1,9 @@
+// UI Super 클래스
 class UIRoot{
 
     constructor(){
         this.container = new PIXI.Container();
-        Device.app.addChild(this.container);
+        Device.app.stage.addChild(this.container);
     }
 
     init(){
@@ -10,6 +11,6 @@ class UIRoot{
     }
 
     destroy(){
-        Device.app.removeChild(this.container);
+        Device.app.stage.removeChild(this.container);
     }
 }

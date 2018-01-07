@@ -12,7 +12,6 @@ class device {
         this.graphics = new PIXI.Graphics();
         this.bump = new Bump(PIXI);
 
-
         this.ealryFunctions = new Array();
         this.functions = new Array();
         this.lateFunctions = new Array();
@@ -39,6 +38,20 @@ class device {
         // body 추가
         document.body.appendChild(this.app.view);
 
+    }
+
+    ChangeUI(Target){
+        if(this.UI !== undefined)
+            this.UI.destroy();
+
+        this.UI = Target;
+    }
+
+    ChangeBackground(Target){
+        if(this.BG !== undefined)
+            this.BG.destroy();
+
+        this.BG = Target;
     }
 
     stageAddChild(depth, sprite){

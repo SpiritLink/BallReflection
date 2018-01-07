@@ -4,4 +4,11 @@ class BGIngame extends BGRoot{
         super();
     }
 
+    init(){
+        super.init();
+    }
+
+    destroy(){
+        super.destroy();
+    }
 }
