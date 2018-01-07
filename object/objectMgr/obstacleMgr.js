@@ -56,16 +56,6 @@ class boxMgr{
         this.createType++;
     }
 
-    // 박스를 한칸씩 이동
-    moveBox(){
-        for(let i = 0; i < this.BoxList.length; i++){
-            this.BoxList[i].sprite.y += 50;
-            if(this.BoxList[i].sprite.y >= Device.app.screen.height / 2){
-                Device.die.renderable = true;
-            }
-        }
-    }
-
     // 박스의 체력을 확인하고 0이하는 제거
     checkHP(){
         for(let i = 0; i < this.BoxList.length; i++)

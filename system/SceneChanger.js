@@ -1,7 +1,14 @@
 // 씬의 전환을 담당
 class SceneChanger{
+    static getInstance(){
+        if(!SceneChanger.instance){
+            SceneChanger.instance = new SceneChanger();
+        }
+        return SceneChanger.instance;
+    }
+
     constructor(){
-        this.currentScene = new SceneRoot();
+        this.currentScene = undefined;
     }
 
     ChangeScene(SceneState){
@@ -25,3 +32,5 @@ class SceneChanger{
         Device.app.ticker.add(this.currentScene.update);
     }
 }
+
+var SceneManager = SceneChanger.getInstance();

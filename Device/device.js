@@ -8,7 +8,7 @@ class device {
 
     constructor(){
         // 변수
-        this.app = new PIXI.Application(720, 1280, {backgroundColor : 0x1099bb});
+        this.app = new PIXI.Application(720, 1000, {backgroundColor : 0x1099bb});
         this.graphics = new PIXI.Graphics();
         this.bump = new Bump(PIXI);
 
