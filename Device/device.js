@@ -18,12 +18,15 @@ class device {
         this.functions = new Array();
         this.lateFunctions = new Array();
 
+        this.BG = new BGRoot();
+        this.Field = new FieldRoot();
+        this.UI = new UIRoot();
+
         // 컨테이너
         this.depth1 = new PIXI.Container(); // 지형
         this.depth2 = new PIXI.Container(); // 물체
         this.depth3 = new PIXI.Container(); // 플레이어, 투사체
         this.depth4 = new PIXI.Container(); // UI
-
 
         this.app.stage.addChild(this.depth1);
         this.app.stage.addChild(this.depth2);
