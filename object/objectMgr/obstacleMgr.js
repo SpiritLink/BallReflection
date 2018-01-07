@@ -32,7 +32,6 @@ class boxMgr{
         var obj = new box(100 + number * 50,100,Math.floor((this.createCnt / 3)) + 1);
         Device.depth1.addChild(obj.sprite);
         this.BoxList.push(obj);
-        Device.depth4.addChild(obj.text);
     }
 
     // 박스 생성 (number에 따른 위치 정의)
@@ -75,9 +74,7 @@ class boxMgr{
             if(this.BoxList[i].hp <= 0)
             {
                 Device.depth1.removeChild(this.BoxList[i].sprite);
-                Device.depth4.removeChild(this.BoxList[i].text);
                 this.BoxList.splice(i, 1);
-                Device.addScore();
             }
         }
     }

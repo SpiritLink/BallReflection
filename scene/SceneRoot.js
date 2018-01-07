@@ -7,31 +7,17 @@ class SceneRoot{
     }
 
     Init(){
-        if(this.UI !== undefined)
-            this.UI.Init();
-
-        if(this.Obj !== undefined)
-            this.Obj.Init();
     }
 
     Update(){
-        if(this.UI !== undefined)
-            this.UI.Update();
-        if(this.Obj !== undefined)
-            this.Obj.Update();
+
     }
 
     Render(){
-        if(this.UI !== undefined)
-            this.UI.Render();
-        if(this.Obj !== undefined)
-            this.Obj.Render();
+
     }
 
     Destroy(){
-        if(this.UI !== undefined)
-            this.UI.Destroy();
-        if(this.Obj !== undefined)
-            this.Obj.Destroy();
+
     }
 }

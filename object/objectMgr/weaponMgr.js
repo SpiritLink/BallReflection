@@ -34,7 +34,6 @@ class ballMgr{
         }
         this.GenerateBall();
         this.deleteBall();
-        Device.setMaxBallCnt(this.ballMaxCnt);
     }
 
     // 늦은 업데이트

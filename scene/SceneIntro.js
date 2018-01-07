@@ -3,6 +3,7 @@ class SceneIntro extends SceneRoot{
 
     Init(){
         super.Init();
+
         this.BG = new BGIntro();
         this.BG.init();
         Device.ChangeBackground(this.BG);

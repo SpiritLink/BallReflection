@@ -42,7 +42,10 @@ class device {
 
     ChangeUI(Target){
         if(this.UI !== undefined)
+        {
             this.UI.destroy();
+        }
+
 
         this.UI = Target;
     }
