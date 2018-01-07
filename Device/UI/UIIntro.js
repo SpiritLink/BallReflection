@@ -4,4 +4,12 @@ class UIIntro extends UIRoot{
      super();
     }
 
+    init(){
+
+    }
+
+    destroy(){
+        super.destroy();
+    }
+
 }
