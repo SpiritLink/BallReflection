@@ -29,7 +29,6 @@ class SceneChanger{
         }
 
         this.currentScene.Init();
-        Device.app.ticker.add(this.currentScene.update);
     }
 }
 

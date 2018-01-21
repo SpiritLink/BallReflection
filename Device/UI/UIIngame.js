@@ -33,6 +33,10 @@ class UIIngame extends UIRoot{
         this.container.addChild(this.maxBallCntText);
     }
 
+    SetPoint(point) {
+        this.pointText.text = '점수 : ' + point.toString();
+    }
+
     destroy(){
         super.destroy();
     }

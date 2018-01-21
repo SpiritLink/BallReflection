@@ -18,12 +18,17 @@ class SceneIngame extends SceneRoot{
 
         this.player.Init(this.BallMGR);
         this.BoxMGR.createLine();
+        this.nPoint = 0;
+
+        Device.app.ticker.add(this.Update);
 
     }
 
     Update(){
         super.Update();
         console.log("Log !");
+        //this.UI.SetPoint(this.nPoint);
+        this.nPoint = this.nPoint + 1;
     }
 
     Render(){
@@ -32,5 +37,6 @@ class SceneIngame extends SceneRoot{
 
     Destroy(){
         super.Destroy();
+        Device.app.ticker.remove(this.Update);
     }
 }

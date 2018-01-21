@@ -12,6 +12,8 @@ class SceneIntro extends SceneRoot{
         this.UI.init();
         Device.ChangeUI(this.UI);
 
+        Device.app.ticker.add(this.Update);
+
     }
 
     Update(){
@@ -24,5 +26,7 @@ class SceneIntro extends SceneRoot{
 
     Destroy(){
         super.Destroy();
+
+        Device.app.ticker.remove(this.Update);
     }
 }
