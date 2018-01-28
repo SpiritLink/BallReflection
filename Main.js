@@ -4,16 +4,15 @@ Device.init();
 SceneManager.ChangeScene("Intro");
 //SceneManager.ChangeScene("Ingame;
 
-PIXI.loader
-    .add('slime', 'required/assets/monster/knight/Knights0.json')
-    .load(onAssetsLoaded);
+//PIXI.loader.add('slime', 'required/assets/monster/knight/Knights0.json').load(onAssetsLoaded);
 
 function onAssetsLoaded(loader , res)
 {
-    var slime = new PIXI.spine.Spine(res.slime.spineData);
+    this.slime = new PIXI.spine.Spine(res.slime.spineData);
 
-    slime.x = 100;
-    slime.y = 100;
+    Device.app.stage.addChild(this.slime);
 
-    Device.app.stage.addChild(slime);
+
+    this.slime.x = 100;
+    this.slime.y = 100;
 }

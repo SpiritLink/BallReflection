@@ -2,7 +2,7 @@ class BGIntro extends BGRoot{
 
     constructor(){
         super();
-
+        this.slime = undefined;
     }
 
     init(){
@@ -17,6 +17,7 @@ class BGIntro extends BGRoot{
 
         this.container.addChild(this.sprite);
 
+        PIXI.loader.add('slime', 'required/assets/monster/knight/Knights0.json').load(this.onAssetsLoaded.bind(this));
     }
 
     destroy(){
@@ -31,7 +32,6 @@ class BGIntro extends BGRoot{
 
         this.slime.x = 100;
         this.slime.y = 50;
-
     }
 
     onAssetsLoaded2(loader, res)
