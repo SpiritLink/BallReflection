@@ -18,6 +18,7 @@ class BGIntro extends BGRoot{
         this.container.addChild(this.sprite);
 
         PIXI.loader.add('slime', 'required/assets/monster/knight/Knights0.json').load(this.onAssetsLoaded.bind(this));
+
     }
 
     destroy(){
@@ -31,16 +32,8 @@ class BGIntro extends BGRoot{
         Device.app.stage.addChild(this.slime);
 
         this.slime.x = 100;
-        this.slime.y = 50;
-    }
+        this.slime.y = 100;
 
-    onAssetsLoaded2(loader, res)
-    {
-        this.knight = new PIXI.spine.Spine(res.knight.spineData);
-
-        Device.app.stage.addChild(this.knight);
-
-        this.knight.x = 200;
-        this.knight.y = 200;
+        // << : 컨테이너에 어떻게 담을지
     }
 }
