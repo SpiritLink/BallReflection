@@ -1,11 +1,11 @@
 class rootObstacle{
     constructor(x, y, HP, spriteName){
-        this.sprite = new PIXI.Sprite(PIXI.Texture.fromImage(spriteName));
-        this.sprite.x = x;
-        this.sprite.y = y;
-        this.sprite.interactive = true;
-        this.sprite.anchor.set(0.5);
-        this.sprite.scale.set(2);
+        this.background = new PIXI.Sprite(PIXI.Texture.fromImage(spriteName));
+        this.background.x = x;
+        this.background.y = y;
+        this.background.interactive = true;
+        this.background.anchor.set(0.5);
+        this.background.scale.set(2);
 
         this.hp = HP;
 
@@ -27,7 +27,7 @@ class rootObstacle{
 
     // HP 텍스트 위치 조정
     updateText(){
-        this.text.x = this.sprite.x;
-        this.text.y = this.sprite.y;
+        this.text.x = this.background.x;
+        this.text.y = this.background.y;
     }
 }

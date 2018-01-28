@@ -70,7 +70,7 @@ class ballMgr{
 
             // fireBall 에서 옮김
             let ballObj = new normalWeapon(this.ballX, this.ballY, this.ballRotation);
-            Device.stageAddChild(2, ballObj.sprite);
+            Device.stageAddChild(2, ballObj.background);
             this.ballList.push(ballObj);
 
             if(this.curBallCnt <= 0){
@@ -86,7 +86,7 @@ class ballMgr{
 
             if (this.ballList[i].deleteMe) {
 
-                Device.depth2.removeChild(this.ballList[i].sprite); // Device에서 자동으로 찾을수 있도록 변경
+                Device.depth2.removeChild(this.ballList[i].background); // Device에서 자동으로 찾을수 있도록 변경
                 this.ballList.splice(i, 1);
 
                 this.leftCnt--;

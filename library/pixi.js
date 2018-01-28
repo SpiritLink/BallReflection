@@ -184,13 +184,13 @@ exports.interleave3 = function(x, y, z) {
   y  = (y | (y<<4))  & 3272356035;
   y  = (y | (y<<2))  & 1227133513;
   x |= (y << 1);
-  
+
   z &= 0x3FF;
   z  = (z | (z<<16)) & 4278190335;
   z  = (z | (z<<8))  & 251719695;
   z  = (z | (z<<4))  & 3272356035;
   z  = (z | (z<<2))  & 1227133513;
-  
+
   return x | (z << 2);
 }
 
@@ -2455,7 +2455,7 @@ VertexArrayObject.prototype.getSize = function()
  */
 var createContext = function(canvas, options)
 {
-    var gl = canvas.getContext('webgl', options) || 
+    var gl = canvas.getContext('webgl', options) ||
          canvas.getContext('experimental-webgl', options);
 
     if (!gl)
@@ -2642,36 +2642,36 @@ module.exports = compileProgram;
  * @param type {String} Type of value
  * @param size {Number}
  */
-var defaultValue = function(type, size) 
+var defaultValue = function(type, size)
 {
     switch (type)
     {
         case 'float':
             return 0;
 
-        case 'vec2': 
+        case 'vec2':
             return new Float32Array(2 * size);
 
         case 'vec3':
             return new Float32Array(3 * size);
 
-        case 'vec4':     
+        case 'vec4':
             return new Float32Array(4 * size);
-            
+
         case 'int':
         case 'sampler2D':
             return 0;
 
-        case 'ivec2':   
+        case 'ivec2':
             return new Int32Array(2 * size);
 
         case 'ivec3':
             return new Int32Array(3 * size);
 
-        case 'ivec4': 
+        case 'ivec4':
             return new Int32Array(4 * size);
 
-        case 'bool':     
+        case 'bool':
             return false;
 
         case 'bvec2':
@@ -2688,7 +2688,7 @@ var defaultValue = function(type, size)
             return new Float32Array([1, 0,
                                      0, 1]);
 
-        case 'mat3': 
+        case 'mat3':
             return new Float32Array([1, 0, 0,
                                      0, 1, 0,
                                      0, 0, 1]);
@@ -2705,7 +2705,7 @@ var booleanArray = function(size)
 {
     var array = new Array(size);
 
-    for (var i = 0; i < array.length; i++) 
+    for (var i = 0; i < array.length; i++)
     {
         array[i] = false;
     }
@@ -2956,8 +2956,8 @@ module.exports = {
  * @param type {String}
  * @return {Number}
  */
-var mapSize = function(type) 
-{ 
+var mapSize = function(type)
+{
     return GLSL_TO_SIZE[type];
 };
 
@@ -2990,15 +2990,15 @@ module.exports = mapSize;
 },{}],21:[function(require,module,exports){
 
 
-var mapSize = function(gl, type) 
+var mapSize = function(gl, type)
 {
-    if(!GL_TABLE) 
+    if(!GL_TABLE)
     {
         var typeNames = Object.keys(GL_TO_GLSL_TYPES);
 
         GL_TABLE = {};
 
-        for(var i = 0; i < typeNames.length; ++i) 
+        for(var i = 0; i < typeNames.length; ++i)
         {
             var tn = typeNames[i];
             GL_TABLE[ gl[tn] ] = GL_TO_GLSL_TYPES[tn];
@@ -3020,17 +3020,17 @@ var GL_TO_GLSL_TYPES = {
   'INT_VEC2':    'ivec2',
   'INT_VEC3':    'ivec3',
   'INT_VEC4':    'ivec4',
-  
+
   'BOOL':        'bool',
   'BOOL_VEC2':   'bvec2',
   'BOOL_VEC3':   'bvec3',
   'BOOL_VEC4':   'bvec4',
-  
+
   'FLOAT_MAT2':  'mat2',
   'FLOAT_MAT3':  'mat3',
   'FLOAT_MAT4':  'mat4',
-  
-  'SAMPLER_2D':  'sampler2D'  
+
+  'SAMPLER_2D':  'sampler2D'
 };
 
 module.exports = mapSize;
@@ -31371,7 +31371,7 @@ function CacheData() {
     this.originalDestroy = null;
     this.originalMask = null;
     this.originalFilterArea = null;
-    this.sprite = null;
+    this.background = null;
 };
 
 Object.defineProperties(DisplayObject.prototype, {
@@ -31428,7 +31428,7 @@ Object.defineProperties(DisplayObject.prototype, {
             } else {
                 data = this._cacheData;
 
-                if (data.sprite) {
+                if (data.background) {
                     this._destroyCachedDisplayObject();
                 }
 
@@ -31463,9 +31463,9 @@ DisplayObject.prototype._renderCachedWebGL = function _renderCachedWebGL(rendere
 
     this._initCachedDisplayObject(renderer);
 
-    this._cacheData.sprite._transformID = -1;
-    this._cacheData.sprite.worldAlpha = this.worldAlpha;
-    this._cacheData.sprite._renderWebGL(renderer);
+    this._cacheData.background._transformID = -1;
+    this._cacheData.background.worldAlpha = this.worldAlpha;
+    this._cacheData.background._renderWebGL(renderer);
 };
 
 /**
@@ -31476,7 +31476,7 @@ DisplayObject.prototype._renderCachedWebGL = function _renderCachedWebGL(rendere
  * @param {PIXI.WebGLRenderer} renderer - the WebGL renderer
  */
 DisplayObject.prototype._initCachedDisplayObject = function _initCachedDisplayObject(renderer) {
-    if (this._cacheData && this._cacheData.sprite) {
+    if (this._cacheData && this._cacheData.background) {
         return;
     }
 
@@ -31557,7 +31557,7 @@ DisplayObject.prototype._initCachedDisplayObject = function _initCachedDisplayOb
     this._calculateBounds = this._calculateCachedBounds;
     this.getLocalBounds = this._getCachedLocalBounds;
 
-    this._cacheData.sprite = cachedSprite;
+    this._cacheData.background = cachedSprite;
 
     this.transform._parentID = -1;
     // restore the transform of the cached sprite to avoid the nasty flicker..
@@ -31587,9 +31587,9 @@ DisplayObject.prototype._renderCachedCanvas = function _renderCachedCanvas(rende
 
     this._initCachedDisplayObjectCanvas(renderer);
 
-    this._cacheData.sprite.worldAlpha = this.worldAlpha;
+    this._cacheData.background.worldAlpha = this.worldAlpha;
 
-    this._cacheData.sprite.renderCanvas(renderer);
+    this._cacheData.background.renderCanvas(renderer);
 };
 
 // TODO this can be the same as the webGL verison.. will need to do a little tweaking first though..
@@ -31601,7 +31601,7 @@ DisplayObject.prototype._renderCachedCanvas = function _renderCachedCanvas(rende
  * @param {PIXI.WebGLRenderer} renderer - the WebGL renderer
  */
 DisplayObject.prototype._initCachedDisplayObjectCanvas = function _initCachedDisplayObjectCanvas(renderer) {
-    if (this._cacheData && this._cacheData.sprite) {
+    if (this._cacheData && this._cacheData.background) {
         return;
     }
 
@@ -31667,7 +31667,7 @@ DisplayObject.prototype._initCachedDisplayObjectCanvas = function _initCachedDis
 
     this.updateTransform = this.displayObjectUpdateTransform;
 
-    this._cacheData.sprite = cachedSprite;
+    this._cacheData.background = cachedSprite;
 
     this.containsPoint = cachedSprite.containsPoint.bind(cachedSprite);
 };
@@ -31678,7 +31678,7 @@ DisplayObject.prototype._initCachedDisplayObjectCanvas = function _initCachedDis
  * @private
  */
 DisplayObject.prototype._calculateCachedBounds = function _calculateCachedBounds() {
-    this._cacheData.sprite._calculateBounds();
+    this._cacheData.background._calculateBounds();
 };
 
 /**
@@ -31688,7 +31688,7 @@ DisplayObject.prototype._calculateCachedBounds = function _calculateCachedBounds
  * @return {Rectangle} The local bounds.
  */
 DisplayObject.prototype._getCachedLocalBounds = function _getCachedLocalBounds() {
-    return this._cacheData.sprite.getLocalBounds();
+    return this._cacheData.background.getLocalBounds();
 };
 
 /**
@@ -31697,8 +31697,8 @@ DisplayObject.prototype._getCachedLocalBounds = function _getCachedLocalBounds()
  * @private
  */
 DisplayObject.prototype._destroyCachedDisplayObject = function _destroyCachedDisplayObject() {
-    this._cacheData.sprite._texture.destroy(true);
-    this._cacheData.sprite = null;
+    this._cacheData.background._texture.destroy(true);
+    this._cacheData.background = null;
 
     _BaseTexture2.default.removeFromCache(this._cacheData.textureCacheId);
     _Texture2.default.removeFromCache(this._cacheData.textureCacheId);

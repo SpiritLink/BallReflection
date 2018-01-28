@@ -13,11 +13,9 @@ class SceneIngame extends SceneRoot{
         Device.ChangeUI(this.UI);
 
         this.BallMGR = new ballMgr();
-        this.BoxMGR = new boxMgr();
         this.player = new Player(Device.app.screen.width / 2, Device.app.screen.height / 2);
 
         this.player.Init(this.BallMGR);
-        this.BoxMGR.createLine();
         this.nPoint = 0;
 
         Device.app.ticker.add(this.Update);

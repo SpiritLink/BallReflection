@@ -27,7 +27,6 @@ class SceneChanger{
                 this.currentScene = new SceneIntro();
                 break;
         }
-
         this.currentScene.Init();
     }
 }

@@ -15,8 +15,8 @@ class normalWeapon extends rootWeapon{
 
     // 움직임에 대한 정의
     move(delta){
-        this.sprite.x += Math.cos(this.sprite.rotation - Math.PI / 2) * delta * this.speed;
-        this.sprite.y += Math.sin(this.sprite.rotation - Math.PI / 2) * delta * this.speed;
+        this.background.x += Math.cos(this.background.rotation - Math.PI / 2) * delta * this.speed;
+        this.background.y += Math.sin(this.background.rotation - Math.PI / 2) * delta * this.speed;
     }
 
 }
